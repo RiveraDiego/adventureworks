@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="projectsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="comentarios">
+          <Key>
+            <PropertyRef Name="comentario_id" />
+          </Key>
+          <Property Name="comentario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_id" Type="int" />
+          <Property Name="comentario_subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="comentario_body" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="foto_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fotos">
+          <Key>
+            <PropertyRef Name="foto_id" />
+          </Key>
+          <Property Name="foto_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="foto_titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="foto_file" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="foto_descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="foto_fecha_creacion" Type="datetime" />
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="usuario_codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuario_contrasena" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__comentari__foto___6EF57B66">
+          <End Role="fotos" Type="Self.fotos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comentarios" Type="Self.comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fotos">
+              <PropertyRef Name="foto_id" />
+            </Principal>
+            <Dependent Role="comentarios">
+              <PropertyRef Name="foto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comentari__usuar__6E01572D">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comentarios" Type="Self.comentarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="comentarios">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fotos__usuario_i__6B24EA82">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="fotos" Type="Self.fotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="fotos">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projectsModelStoreContainer">
+          <EntitySet Name="comentarios" EntityType="Self.comentarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fotos" EntityType="Self.fotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__comentari__foto___6EF57B66" Association="Self.FK__comentari__foto___6EF57B66">
+            <End Role="fotos" EntitySet="fotos" />
+            <End Role="comentarios" EntitySet="comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comentari__usuar__6E01572D" Association="Self.FK__comentari__usuar__6E01572D">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="comentarios" EntitySet="comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fotos__usuario_i__6B24EA82" Association="Self.FK__fotos__usuario_i__6B24EA82">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="fotos" EntitySet="fotos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="projectsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="comentario">
+          <Key>
+            <PropertyRef Name="comentario_id" />
+          </Key>
+          <Property Name="comentario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_id" Type="Int32" />
+          <Property Name="comentario_subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comentario_body" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="foto_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="foto" Relationship="Self.FK__comentari__foto___6EF57B66" FromRole="comentarios" ToRole="fotos" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__comentari__usuar__6E01572D" FromRole="comentarios" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="foto">
+          <Key>
+            <PropertyRef Name="foto_id" />
+          </Key>
+          <Property Name="foto_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="foto_titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="foto_file" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="foto_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="foto_fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comentarios" Relationship="Self.FK__comentari__foto___6EF57B66" FromRole="fotos" ToRole="comentarios" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__fotos__usuario_i__6B24EA82" FromRole="fotos" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario_contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="comentarios" Relationship="Self.FK__comentari__usuar__6E01572D" FromRole="usuarios" ToRole="comentarios" />
+          <NavigationProperty Name="fotos" Relationship="Self.FK__fotos__usuario_i__6B24EA82" FromRole="usuarios" ToRole="fotos" />
+        </EntityType>
+        <Association Name="FK__comentari__foto___6EF57B66">
+          <End Role="fotos" Type="Self.foto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comentarios" Type="Self.comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fotos">
+              <PropertyRef Name="foto_id" />
+            </Principal>
+            <Dependent Role="comentarios">
+              <PropertyRef Name="foto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comentari__usuar__6E01572D">
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comentarios" Type="Self.comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="comentarios">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fotos__usuario_i__6B24EA82">
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="1" />
+          <End Role="fotos" Type="Self.foto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="fotos">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projectsEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="comentarios" EntityType="Self.comentario" />
+          <EntitySet Name="fotos" EntityType="Self.foto" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <AssociationSet Name="FK__comentari__foto___6EF57B66" Association="Self.FK__comentari__foto___6EF57B66">
+            <End Role="fotos" EntitySet="fotos" />
+            <End Role="comentarios" EntitySet="comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comentari__usuar__6E01572D" Association="Self.FK__comentari__usuar__6E01572D">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="comentarios" EntitySet="comentarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fotos__usuario_i__6B24EA82" Association="Self.FK__fotos__usuario_i__6B24EA82">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="fotos" EntitySet="fotos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="projectsModelStoreContainer" CdmEntityContainer="projectsEntities1">
+          <EntitySetMapping Name="comentarios">
+            <EntityTypeMapping TypeName="projectsModel.comentario">
+              <MappingFragment StoreEntitySet="comentarios">
+                <ScalarProperty Name="comentario_id" ColumnName="comentario_id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="comentario_subject" ColumnName="comentario_subject" />
+                <ScalarProperty Name="comentario_body" ColumnName="comentario_body" />
+                <ScalarProperty Name="foto_id" ColumnName="foto_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fotos">
+            <EntityTypeMapping TypeName="projectsModel.foto">
+              <MappingFragment StoreEntitySet="fotos">
+                <ScalarProperty Name="foto_id" ColumnName="foto_id" />
+                <ScalarProperty Name="foto_titulo" ColumnName="foto_titulo" />
+                <ScalarProperty Name="foto_file" ColumnName="foto_file" />
+                <ScalarProperty Name="foto_descripcion" ColumnName="foto_descripcion" />
+                <ScalarProperty Name="foto_fecha_creacion" ColumnName="foto_fecha_creacion" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="projectsModel.usuario">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+                <ScalarProperty Name="usuario_codigo" ColumnName="usuario_codigo" />
+                <ScalarProperty Name="usuario_contrasena" ColumnName="usuario_contrasena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

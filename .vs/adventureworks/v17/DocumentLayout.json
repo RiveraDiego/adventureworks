@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|c:\\users\\menendezd\\documents\\tutos\\adventureworks\\models\\foto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|solutionrelative:models\\foto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|c:\\users\\menendezd\\documents\\tutos\\adventureworks\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|c:\\users\\menendezd\\documents\\tutos\\adventureworks\\views\\fotos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|solutionrelative:views\\fotos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|c:\\users\\menendezd\\documents\\tutos\\adventureworks\\views\\fotos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|solutionrelative:views\\fotos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|c:\\users\\menendezd\\documents\\tutos\\adventureworks\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8F1D76F9-FFAA-466F-BD01-E9B0C7818B82}|adventureworks.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 288,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Views\\fotos\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\fotos\\Details.cshtml",
+              "ToolTip": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Views\\fotos\\Details.cshtml",
+              "RelativeToolTip": "Views\\fotos\\Details.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-21T21:55:14.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Views\\fotos\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\fotos\\Index.cshtml",
+              "ToolTip": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Views\\fotos\\Index.cshtml",
+              "RelativeToolTip": "Views\\fotos\\Index.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACUAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-21T21:47:04.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "foto.cs",
+              "DocumentMoniker": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Models\\foto.cs",
+              "RelativeDocumentMoniker": "Models\\foto.cs",
+              "ToolTip": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Models\\foto.cs",
+              "RelativeToolTip": "Models\\foto.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAgwB0AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-21T21:44:34.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-21T20:59:49.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\menendezd\\Documents\\Tutos\\adventureworks\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-21T20:59:38.846Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

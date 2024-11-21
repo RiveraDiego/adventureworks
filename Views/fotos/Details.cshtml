@@ -1,0 +1,65 @@
+﻿@model adventureworks.Models.foto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>foto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.foto_titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.foto_titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.foto_file)
+        </dt>
+
+        <dd>
+            @if (Model.foto_file != null)
+            {
+                <img src="@Model.FotoFile" class="img-fluid" alt="Foto" />
+            }
+            else
+            {
+                <p>No hay imagen disponible.</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.foto_descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.foto_descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.foto_fecha_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.foto_fecha_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.usuario_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.usuario_nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.foto_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

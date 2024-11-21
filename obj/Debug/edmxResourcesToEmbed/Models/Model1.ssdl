@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projectsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="comentarios">
+    <Key>
+      <PropertyRef Name="comentario_id" />
+    </Key>
+    <Property Name="comentario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_id" Type="int" />
+    <Property Name="comentario_subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="comentario_body" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="foto_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fotos">
+    <Key>
+      <PropertyRef Name="foto_id" />
+    </Key>
+    <Property Name="foto_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="foto_titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="foto_file" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="foto_descripcion" Type="nvarchar" MaxLength="255" />
+    <Property Name="foto_fecha_creacion" Type="datetime" />
+    <Property Name="usuario_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="usuario_id" />
+    </Key>
+    <Property Name="usuario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="usuario_codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="usuario_contrasena" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__comentari__foto___6EF57B66">
+    <End Role="fotos" Type="Self.fotos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="comentarios" Type="Self.comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fotos">
+        <PropertyRef Name="foto_id" />
+      </Principal>
+      <Dependent Role="comentarios">
+        <PropertyRef Name="foto_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comentari__usuar__6E01572D">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="comentarios" Type="Self.comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="usuario_id" />
+      </Principal>
+      <Dependent Role="comentarios">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__fotos__usuario_i__6B24EA82">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="fotos" Type="Self.fotos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="usuario_id" />
+      </Principal>
+      <Dependent Role="fotos">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projectsModelStoreContainer">
+    <EntitySet Name="comentarios" EntityType="Self.comentarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fotos" EntityType="Self.fotos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__comentari__foto___6EF57B66" Association="Self.FK__comentari__foto___6EF57B66">
+      <End Role="fotos" EntitySet="fotos" />
+      <End Role="comentarios" EntitySet="comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comentari__usuar__6E01572D" Association="Self.FK__comentari__usuar__6E01572D">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="comentarios" EntitySet="comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__fotos__usuario_i__6B24EA82" Association="Self.FK__fotos__usuario_i__6B24EA82">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="fotos" EntitySet="fotos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

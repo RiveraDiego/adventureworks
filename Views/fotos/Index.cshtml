@@ -1,0 +1,57 @@
+﻿@model IEnumerable<adventureworks.Models.foto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.foto_titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.foto_file)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.foto_descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.foto_fecha_creacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario.usuario_nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.foto_titulo)
+        </td>
+        <td>
+            <img src="@item.FotoFile" height="100" weight="100" alt="Foto" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.foto_descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.foto_fecha_creacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuario.usuario_nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.foto_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.foto_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.foto_id })
+        </td>
+    </tr>
+}
+
+</table>
