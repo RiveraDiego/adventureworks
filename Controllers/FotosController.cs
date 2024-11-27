@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -48,13 +49,54 @@ namespace adventureworks.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "foto_id,foto_titulo,foto_file,foto_descripcion,foto_fecha_creacion,usuario_id")] foto foto)
+        public ActionResult Create([Bind(Include = "foto_id,foto_titulo,foto_file,foto_descripcion,foto_fecha_creacion,usuario_id")] foto foto, HttpPostedFileBase file)
         {
+            if (file != null && file.ContentLength > 0)
+            {
+                // Verifica el tipo de archivo
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                var extension = System.IO.Path.GetExtension(file.FileName).ToLower();
+                if (!allowedExtensions.Contains(extension))
+                {
+                    ViewBag.FileError = "Formato de archivo no permitido. Solo se permiten imágenes.";
+                    ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre", foto.usuario_id);
+                    return View(foto);
+                }
+
+                // Leer el archivo y convertirlo a Base64
+                using (var binaryReader = new System.IO.BinaryReader(file.InputStream))
+                {
+                    byte[] fileBytes = binaryReader.ReadBytes(file.ContentLength);
+                    var mimeType = file.ContentType; // Obtiene el tipo MIME del archivo (e.g., "image/png", "image/jpeg")
+                    foto.foto_file = $"data:{mimeType};base64," + Convert.ToBase64String(fileBytes);
+                }
+            }
+            else
+            {
+                ViewBag.FileError = "Por favor, selecciona un archivo de imagen.";
+                ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre", foto.usuario_id);
+                return View(foto);
+            }
             if (ModelState.IsValid)
             {
-                db.fotos.Add(foto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    foto.foto_fecha_creacion = DateTime.Now;
+                    db.fotos.Add(foto);
+                    db.SaveChanges();
+                    // return RedirectToAction("Edit", new { id = foto.foto_id });
+                    return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var validationError in ex.EntityValidationErrors)
+                    {
+                        foreach (var error in validationError.ValidationErrors)
+                        {
+                            ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                        }
+                    }
+                }
             }
 
             ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre", foto.usuario_id);
