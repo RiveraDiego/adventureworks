@@ -1,0 +1,56 @@
+﻿@model adventureworks.Models.comentario
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>comentario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario_subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario_subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario_body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario_body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.foto.foto_titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.foto.foto_titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.usuario_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.usuario_nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,65 +1,87 @@
 ﻿@model adventureworks.Models.foto
+@using adventureworks.Utils
 
 @{
     ViewBag.Title = "Details";
 }
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            <div class="col-lg-3">
+                <div class="d-flex align-items-center mt-lg-5 mb-4">
+                    <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                    <div class="ms-3">
+                        <div class="fw-bold">@Model.usuario.usuario_nombre</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <!-- Post content-->
+                <article>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <a href="@Url.Action("Index","Fotos")" class="btn btn-outline-primary btn-sm">@UiMessages.BtnRegresar</a>
+                        <h1 class="fw-bolder mb-1">@Model.foto_titulo</h1>
+                        <!-- Post meta content-->
+                        <div class="text-muted fst-italic mb-2">@Model.foto_fecha_creacion</div>
+                    </header>
+                    <!-- Preview image figure-->
+                    <figure class="mb-4">
+                    <img class="img-fluid rounded" src="@Model.FotoFile" alt="Foto post" />
+                    </figure>
+                    <!-- Post content-->
+                    <section class="mb-5">
+                        <p>
+                            @Model.foto_descripcion
+                        </p>
+                    </section>
+                </article>
+                <!-- Comments section-->
+                <section>
+                    <h3>Comentarios</h3>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <!-- Comment form-->
+                            <form action="" class="mb-4">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="3" placeholder="@UiMessages.dejarUnComentario"></textarea>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="submit" class="btn btn-primary">@UiMessages.BtnPublicar</button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                            @if (Model.comentarios != null && Model.comentarios.Any())
+                            {
+                                <ul>
+                                    @foreach (var comentario in Model.comentarios)
+                                    {
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                            <div class="ms-3">
+                                                <div class="fw-bold">@comentario.comentario_subject</div>
+                                                @comentario.comentario_body
+                                            </div>
+                                        </div>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <div class="d-flex">
+                                    <div class="ms-3">
+                                        @UiMessages.sinComentarios
+                                    </div>
+                                </div>
 
-<h2>Details</h2>
-
-<div>
-    <h4>foto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.foto_titulo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.foto_titulo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.foto_file)
-        </dt>
-
-        <dd>
-            @if (Model.foto_file != null)
-            {
-                <img src="@Model.FotoFile" class="img-fluid" alt="Foto" />
-            }
-            else
-            {
-                <p>No hay imagen disponible.</p>
-            }
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.foto_descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.foto_descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.foto_fecha_creacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.foto_fecha_creacion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.usuario.usuario_nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usuario.usuario_nombre)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.foto_id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                            }
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
