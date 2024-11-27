@@ -1,0 +1,42 @@
+﻿@model adventureworks.Models.usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario_contrasena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario_contrasena)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.usuario_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
