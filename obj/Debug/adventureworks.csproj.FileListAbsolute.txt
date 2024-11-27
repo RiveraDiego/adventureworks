@@ -88,8 +88,6 @@ C:\Users\menendezd\Documents\Tutos\adventureworks\obj\Debug\adventureworks.cspro
 C:\Users\menendezd\Documents\Tutos\adventureworks\obj\Debug\adventur.7E5CA53B.Up2Date
 C:\Users\menendezd\Documents\Tutos\adventureworks\obj\Debug\adventureworks.dll
 C:\Users\menendezd\Documents\Tutos\adventureworks\obj\Debug\adventureworks.pdb
-C:\Users\menendezd\Documents\Tutos\repo\adventureworks\obj\Debug\adventureworks.csproj.AssemblyReference.cache
-C:\Users\menendezd\Documents\Tutos\repo\adventureworks\obj\Debug\adventureworks.csproj.CoreCompileInputs.cache
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\bin\adventureworks.dll.config
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\bin\adventureworks.dll
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\bin\adventureworks.pdb
@@ -175,6 +173,8 @@ C:\Users\menendezd\Documents\Tutos\repo\adventureworks\bin\es\System.Web.Razor.r
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\bin\es\System.Web.WebPages.resources.dll
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\menendezd\Documents\Tutos\repo\adventureworks\obj\Debug\adventureworks.csproj.AssemblyReference.cache
+C:\Users\menendezd\Documents\Tutos\repo\adventureworks\obj\Debug\adventureworks.csproj.CoreCompileInputs.cache
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\obj\Debug\adventur.7E5CA53B.Up2Date
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\obj\Debug\adventureworks.dll
 C:\Users\menendezd\Documents\Tutos\repo\adventureworks\obj\Debug\adventureworks.pdb

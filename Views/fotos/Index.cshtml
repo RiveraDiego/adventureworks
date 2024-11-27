@@ -3,55 +3,48 @@
 @{
     ViewBag.Title = "Index";
 }
+<section class="py-5">
+    <div class="container px-5">
+        <h2 class="fw-bolder fs-5 mb-4">@Html.ActionLink("Nueva entrada", "Create")</h2>
+        <div class="row gx-5">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 mb-5">
+                    <div class="card h-100 shadow border-0">
+                        <img class="card-img-top img-fluid" src="@item.FotoFile" alt="foto" />
+                        <div class="card-body p-4">
+                            <a class="text-decoration-none link-dark stretched-link" href="@Url.Action("Details", "Fotos", new { id = item.foto_id })">
+                                <div class="h5 card-title mb-3">
+                                    @Html.DisplayFor(modelItem => item.foto_titulo)
+                                </div>
+                            </a>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.foto_titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.foto_file)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.foto_descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.foto_fecha_creacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.usuario.usuario_nombre)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.foto_titulo)
-        </td>
-        <td>
-            <img src="@item.FotoFile" height="100" weight="100" alt="Foto" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.foto_descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.foto_fecha_creacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.usuario.usuario_nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.foto_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.foto_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.foto_id })
-        </td>
-    </tr>
-}
-
-</table>
+                            <p class="card-text mb-0">
+                                @Html.DisplayFor(modelItem => item.foto_descripcion)
+                            </p>
+                        </div>
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                            <div class="d-flex align-items-end justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                    <div class="small">
+                                        <div class="fw-bold">@Html.DisplayFor(modelItem => item.usuario.usuario_nombre)</div>
+                                        <div class="text-muted">
+                                            @Html.DisplayFor(modelItem => item.foto_fecha_creacion) &middot;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        <div class="text-end mb-5 mb-xl-0">
+            <a class="text-decoration-none" href="#!">
+                More stories
+                <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
