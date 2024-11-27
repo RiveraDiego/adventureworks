@@ -1,0 +1,50 @@
+﻿@model adventureworks.Models.comentario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>comentario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario_subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario_subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comentario_body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comentario_body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.foto.foto_titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.foto.foto_titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.usuario_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.usuario_nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.comentario_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

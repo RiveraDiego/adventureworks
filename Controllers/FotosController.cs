@@ -23,17 +23,19 @@ namespace adventureworks.Controllers
         }
 
         // GET: fotos/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id_foto)
         {
-            if (id == null)
+            if (id_foto == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            foto foto = db.fotos.Find(id);
+            foto foto = db.fotos.Include(f => f.comentarios).FirstOrDefault(f => f.foto_id == id_foto);
             if (foto == null)
             {
                 return HttpNotFound();
             }
+            // Ordenar los comentarios de forma DESC, desde el ultimo hecho hasta el primero
+            foto.comentarios = foto.comentarios.OrderByDescending(c => c.comentario_id).ToList();
             return View(foto);
         }
 
