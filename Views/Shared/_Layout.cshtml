@@ -8,10 +8,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/scripts")
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column">
     <main class="flex-shrink-0">
         @Html.Partial("_Navigation")
         @RenderBody()
     </main>
+    @Html.Partial("_Footer")
 </body>
 </html>
