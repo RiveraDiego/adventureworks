@@ -22,11 +22,14 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
+obj/Debug/adventureworks.dll
+bin/*
 obj/
+obj/Debug/*
 vs/
 .vs/
 .obj/
+.obj/Debug/*
 TestResults/
 ###################
 # Web publish log #
