@@ -48,11 +48,26 @@ namespace adventureworks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "usuario_id,usuario_nombre,usuario_codigo,usuario_contrasena")] usuario usuario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.usuarios.Add(usuario);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.usuarios.Add(usuario);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                foreach (var validationError in ex.EntityValidationErrors)
+                {
+                    foreach (var error in validationError.ValidationErrors)
+                    {
+                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                    }
+                }
+                // Regresar la vista con los errores añadidos al ModelState
+                return View(usuario);
             }
 
             return View(usuario);

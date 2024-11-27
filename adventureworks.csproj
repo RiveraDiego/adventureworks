@@ -165,9 +165,12 @@
     <Content Include="Content\assets\favicon.ico" />
     <Content Include="Content\css\bootstrap-icons.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\css\sweetalert2.min.css" />
     <Content Include="Content\imagenes\no-image.png" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\js\jquery-3.7.1.min.js" />
     <Content Include="Content\js\scripts.js" />
+    <Content Include="Content\js\sweetalert2.all.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
@@ -216,6 +219,7 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

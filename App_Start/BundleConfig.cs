@@ -12,11 +12,14 @@ namespace adventureworks
             // para la producción, use la herramienta de compilación disponible en https://modernizr.com para seleccionar solo las pruebas que necesite.           
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/css/bootstrap-icons.css",
+                "~/Content/css/sweetalert2.min.css",
                 "~/Content/css/styles.css"));
 
             var scriptBundle = new ScriptBundle("~/bundles/scripts")
                 .Include(
+                "~/Content/js/jquery-3.7.1.min.js",
                 "~/Content/js/bootstrap.bundle.min.js",
+                "~/Content/js/sweetalert2.all.min.js",
                 "~/Content/js/scripts.js"
                 );
             

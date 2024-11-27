@@ -14,12 +14,10 @@
             <div class="form-horizontal">
                 <h4>Usuario</h4>
                 <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
                 <div class="form-group">
                     @Html.LabelFor(model => model.usuario_codigo, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                         @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -34,7 +32,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.usuario_contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.usuario_contrasena, new { htmlAttributes = new { @class = "form-control" } })
+                        <input class="form-control text-box single-line" id="usuario_contrasena" name="usuario_contrasena" type="password">
                         @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
                     </div>
                 </div><br />
@@ -51,51 +49,71 @@
     </div>
 </section>
 
-
-@*using (Html.BeginForm()) 
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState.Values.Any(v => v.Errors.Count > 0))
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>usuario</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.usuario_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usuario_nombre, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    var erroresHtml = string.Join("<br>", ViewData.ModelState.Values
+    .SelectMany(v => v.Errors)
+    .Select(e => HttpUtility.JavaScriptStringEncode(e.ErrorMessage)));
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.usuario_codigo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.usuario_contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usuario_contrasena, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                title: 'Errores en el formulario',
+                html: '@Html.Raw(erroresHtml)',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+
+
+@*using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>usuario</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.usuario_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.usuario_nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.usuario_codigo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.usuario_contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.usuario_contrasena, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
