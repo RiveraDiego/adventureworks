@@ -1,42 +1,65 @@
 ﻿@model adventureworks.Models.usuario
+@using adventureworks.Utils
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>usuario</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.usuario_nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usuario_nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.usuario_codigo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usuario_codigo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.usuario_contrasena)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usuario_contrasena)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.usuario_id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            <div class="col-lg-3">
+                <div class="d-flex align-items-center mt-lg-5 mb-4">
+                    <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                    <div class="ms-3">
+                        <div class="fw-bold">@Model.usuario_codigo</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <!-- Post content-->
+                <article>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <a href="@Url.Action("Index","Usuarios")" class="btn btn-outline-primary">@UiMessages.BtnRegresar</a>
+                        
+                        <!-- Post meta content-->
+                    </header>
+                    <!-- Post content-->
+                    <section class="mb-5">
+                        <div class="form-group"><hr />
+                            <h1 class="fw-bolder mb-1"> @Html.Label("Nombre: ", htmlAttributes: new { @class = "control-label col-md-2" }) </h1>
+                            <div class="col-md-10">
+                                <h2>@Html.DisplayFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control" } }) </h2>
+                                @Html.ValidationMessageFor(model => model.usuario_nombre, "", new { @class = "text-danger" })
+                            </div>
+                            <hr />
+                        </div><br />
+                        <div class="form-group">
+                            <h1 class="fw-bolder mb-1"> @Html.Label("Usuario: ", htmlAttributes: new { @class = "control-label col-md-2" }) </h1>
+                            <div class="col-md-10">
+                                <h2>@Html.DisplayFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } }) </h2>
+                                @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
+                            </div>
+                            <hr />
+                        </div><br />
+                        <div class="form-group">
+                            <h1 class="fw-bolder mb-1"> @Html.Label("Contrasena", htmlAttributes: new { @class = "control-label col-md-2" }) </h1>
+                            <div class="col-md-10">
+                                <h2>@Html.DisplayFor(model => model.usuario_contrasena, new { htmlAttributes = new { @class = "form-control" } }) </h2>
+                                @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
+                            </div>
+                        </div><br />
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 " style="text-align:right;">
+                                <a href="@Url.Action("Edit", "Usuarios", new { id = Model.usuario_id })" class="btn btn-primary">@UiMessages.BtnEditar</a>
+                            </div>
+                        </div>
+                    </section>
+                </article>   
+            </div>
+        </div>
+    </div>
+</section>
