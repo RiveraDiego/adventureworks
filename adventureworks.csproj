@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\FotosController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,8 +168,10 @@
     <Content Include="Content\assets\favicon.ico" />
     <Content Include="Content\css\fontawesome.css" />
     <Content Include="Content\css\bootstrap-icons.css" />
+    <Content Include="Content\css\signin.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\css\sweetalert2.min.css" />
+    <Content Include="Content\imagenes\login.png" />
     <Content Include="Content\imagenes\no-image.png" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
     <Content Include="Content\js\jquery-3.7.1.min.js" />
@@ -236,6 +239,8 @@
     <Content Include="Views\Comentarios\Details.cshtml" />
     <Content Include="Views\Comentarios\Edit.cshtml" />
     <Content Include="Views\Comentarios\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

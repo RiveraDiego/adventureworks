@@ -29,7 +29,16 @@ namespace adventureworks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            foto foto = db.fotos.Include(f => f.comentarios).FirstOrDefault(f => f.foto_id == id);
+            if (Request.Cookies["UserSession"] != null)
+            {
+                ViewBag.session = true;
+            }
+            else
+            {
+                ViewBag.session = false;
+            }
+
+                foto foto = db.fotos.Include(f => f.comentarios).FirstOrDefault(f => f.foto_id == id);
             if (foto == null)
             {
                 return HttpNotFound();

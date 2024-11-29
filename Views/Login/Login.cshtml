@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <img class="mb-4 img-fluid" src="~/Content/imagenes/login.png" alt="login">
+    <h1 class="h3 mb-3 fw-normal">Iniciar Sesi&oacute;n</h1>
+
+    <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" name="usuario_codigo">
+        <label for="floatingInput">C&oacute;digo de usuario</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="usuario_contrasena">
+        <label for="floatingPassword">Contrase&ntilde;a</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+    <p class="mt-5 mb-3 text-muted">Adventure Works &copy; UTEC | 2024</p>
+}
