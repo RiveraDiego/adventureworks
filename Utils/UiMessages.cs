@@ -15,7 +15,8 @@ namespace adventureworks.Utils
         public const string BtnCancelar = "Cancelar";
         public const string BtnEditar = "Editar";
         public const string BtnPublicar = "Publicar";
-        public const string dejarUnComentario = "Deja un comentario!";
+        public const string subjectComment = "Asunto o titulo del comentario";
+        public const string dejarUnComentario = "Que te pareció esta foto?";
         public const string sinComentarios = "Aún no hay comentarios para esta foto.";
     }
 }

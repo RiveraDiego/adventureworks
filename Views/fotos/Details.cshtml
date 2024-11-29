@@ -9,7 +9,7 @@
         <div class="row gx-5">
             <div class="col-lg-3">
                 <div class="d-flex align-items-center mt-lg-5 mb-4">
-                    <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                    <i class="fa-solid fa-user fa-3x"></i>
                     <div class="ms-3">
                         <div class="fw-bold">@Model.usuario.usuario_nombre</div>
                     </div>
@@ -43,29 +43,40 @@
                     <div class="card bg-light">
                         <div class="card-body">
                             <!-- Comment form-->
-                            <form action="" class="mb-4">
+                            @using (Html.BeginForm("Details", "Fotos", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
                                 <div class="row align-items-center">
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" rows="3" placeholder="@UiMessages.dejarUnComentario"></textarea>
+                                    <div class="col-sm-12">
+                                        <input type="text" name="comentario_subject" placeholder="@UiMessages.subjectComment" class="form-control" />
+                                        <br />
+                                        <textarea class="form-control" rows="3" name="comentario_body" placeholder="@UiMessages.dejarUnComentario"></textarea>
+                                        @Html.Hidden("usuario_id", "1")
+                                        @Html.Hidden("foto_id", Model.foto_id)
+
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="clearfix"><br /></div>
+                                    <div class="col-sm-12">
                                         <button type="submit" class="btn btn-primary">@UiMessages.BtnPublicar</button>
                                     </div>
                                 </div>
-                                
-                            </form>
+
+                            }
+                            <div class="clearfix"><br /></div>
                             @if (Model.comentarios != null && Model.comentarios.Any())
                             {
-                                <ul>
+                                <ul style="padding-left:1rem;">
                                     @foreach (var comentario in Model.comentarios)
                                     {
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                        <li class="d-flex mb-3 align-items-center bg-secondary bg-opacity-10 p-3 rounded-5">
+                                            <div class="flex-shrink-0">
+                                                <i class="fa-solid fa-user fa-2x"></i>
+                                            </div>
                                             <div class="ms-3">
                                                 <div class="fw-bold">@comentario.comentario_subject</div>
                                                 @comentario.comentario_body
                                             </div>
-                                        </div>
+                                        </li>
                                     }
                                 </ul>
                             }

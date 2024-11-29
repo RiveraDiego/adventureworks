@@ -23,13 +23,13 @@ namespace adventureworks.Controllers
         }
 
         // GET: fotos/Details/5
-        public ActionResult Details(int? id_foto)
+        public ActionResult Details(int? id)
         {
-            if (id_foto == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            foto foto = db.fotos.Include(f => f.comentarios).FirstOrDefault(f => f.foto_id == id_foto);
+            foto foto = db.fotos.Include(f => f.comentarios).FirstOrDefault(f => f.foto_id == id);
             if (foto == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,40 @@ namespace adventureworks.Controllers
             return View(foto);
         }
 
-        // GET: fotos/Create
-        public ActionResult Create()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Details([Bind(Include = "comentario_subject,comentario_body,foto_id,usuario_id")] comentario comentario)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    db.comentarios.Add(comentario);
+                    db.SaveChanges();
+                    // return RedirectToAction("Edit", new { id = foto.foto_id });
+                    return RedirectToAction("Details", new { id = comentario.foto_id});
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var validationError in ex.EntityValidationErrors)
+                    {
+                        foreach (var error in validationError.ValidationErrors)
+                        {
+                            ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return RedirectToAction("Details", new { id = comentario.foto_id });
+            }
+
+            return RedirectToAction("Details", new { id = comentario.foto_id });
+        }
+
+            // GET: fotos/Create
+            public ActionResult Create()
         {
             ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre");
             return View();
