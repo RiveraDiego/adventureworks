@@ -18,5 +18,6 @@ namespace adventureworks.Utils
         public const string subjectComment = "Asunto o titulo del comentario";
         public const string dejarUnComentario = "Que te pareció esta foto?";
         public const string sinComentarios = "Aún no hay comentarios para esta foto.";
+        public const string sesionRequeridaComentarios = "Debe iniciar sesión para poder comentar.";
     }
 }

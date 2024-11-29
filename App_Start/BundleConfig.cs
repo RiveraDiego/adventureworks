@@ -16,6 +16,10 @@ namespace adventureworks
                 "~/Content/css/fontawesome.css",
                 "~/Content/css/styles.css"));
 
+            bundles.Add(new StyleBundle("~/Signin").Include(
+                "~/Content/css/signin.css"
+                ));
+
             var scriptBundle = new ScriptBundle("~/bundles/scripts")
                 .Include(
                 "~/Content/js/jquery-3.7.1.min.js",

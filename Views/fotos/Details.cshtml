@@ -43,24 +43,39 @@
                     <div class="card bg-light">
                         <div class="card-body">
                             <!-- Comment form-->
-                            @using (Html.BeginForm("Details", "Fotos", FormMethod.Post))
+                            @if (ViewBag.session)
                             {
-                                @Html.AntiForgeryToken()
-                                <div class="row align-items-center">
-                                    <div class="col-sm-12">
-                                        <input type="text" name="comentario_subject" placeholder="@UiMessages.subjectComment" class="form-control" />
-                                        <br />
-                                        <textarea class="form-control" rows="3" name="comentario_body" placeholder="@UiMessages.dejarUnComentario"></textarea>
-                                        @Html.Hidden("usuario_id", "1")
-                                        @Html.Hidden("foto_id", Model.foto_id)
+                                using (Html.BeginForm("Details", "Fotos", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-12">
+                                            <input type="text" name="comentario_subject" placeholder="@UiMessages.subjectComment" class="form-control" />
+                                            <br />
+                                            <textarea class="form-control" rows="3" name="comentario_body" placeholder="@UiMessages.dejarUnComentario"></textarea>
+                                            @Html.Hidden("usuario_id", "1")
+                                            @Html.Hidden("foto_id", Model.foto_id)
 
+                                        </div>
+                                        <div class="clearfix"><br /></div>
+                                        <div class="col-sm-12">
+                                            <button type="submit" class="btn btn-primary">@UiMessages.BtnPublicar</button>
+                                        </div>
                                     </div>
-                                    <div class="clearfix"><br /></div>
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-primary">@UiMessages.BtnPublicar</button>
+
+                                }
+                            }
+                            else
+                            {
+                                <div class="d-flex">
+                                    <div class="ms-3">
+                                        @UiMessages.sesionRequeridaComentarios
+                                        <br /><br />
+                                        <a class="btn btn-primary btn-sm" href="@Url.Action("Login", "Login")">
+                                            Iniciar sessi&oacute;n
+                                        </a>
                                     </div>
                                 </div>
-
                             }
                             <div class="clearfix"><br /></div>
                             @if (Model.comentarios != null && Model.comentarios.Any())
