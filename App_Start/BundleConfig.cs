@@ -13,6 +13,7 @@ namespace adventureworks
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/css/bootstrap-icons.css",
                 "~/Content/css/sweetalert2.min.css",
+                "~/Content/css/fontawesome.css",
                 "~/Content/css/styles.css"));
 
             var scriptBundle = new ScriptBundle("~/bundles/scripts")

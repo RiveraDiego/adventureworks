@@ -165,6 +165,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="Content\assets\favicon.ico" />
+    <Content Include="Content\css\fontawesome.css" />
     <Content Include="Content\css\bootstrap-icons.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\css\sweetalert2.min.css" />
@@ -214,6 +215,14 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\css\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\css\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\css\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\css\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\css\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\css\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="Content\css\webfonts\fa-v4compatibility.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
