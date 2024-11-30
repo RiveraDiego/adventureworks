@@ -46,7 +46,7 @@ namespace adventureworks.Controllers
                 ViewBag.session = false;
             }
 
-                foto foto = db.fotos.Include(f => f.comentarios).FirstOrDefault(f => f.foto_id == id);
+                foto foto = db.fotos.Include(f => f.comentarios.Select(c => c.usuario)).FirstOrDefault(f => f.foto_id == id);
             if (foto == null)
             {
                 return HttpNotFound();

@@ -87,7 +87,7 @@
                                                 <i class="fa-solid fa-user fa-2x"></i>
                                             </div>
                                             <div class="ms-3">
-                                                <div class="fw-bold">@comentario.comentario_subject <small class="text-muted">- @comentario.usuario.usuario_nombre - @Html.DisplayFor(modelItem => comentario.comentario_fecha_creacion)</small></div>
+                                                <div class="fw-bold">@comentario.comentario_subject <small class="text-muted">- @comentario.usuario.usuario_nombre - @comentario.comentario_fecha_creacion.ToShortDateString() a las @comentario.comentario_fecha_creacion.ToShortTimeString()</small></div>
                                                 @comentario.comentario_body
                                             </div>
                                         </li>
