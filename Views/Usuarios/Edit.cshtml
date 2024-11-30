@@ -4,53 +4,127 @@
 @{
     ViewBag.Title = "Edit";
 }
-<section class="py-5">
-    <div class="container px-5">
-        <h2 class="fw-bolder fs-5 mb-4">Editar Usuario:  @Model.usuario_nombre</h2>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-
-            <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.usuario_id)
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.usuario_codigo, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
+<section class="py-5" style="background-color: #ffffff;">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="card shadow-sm border-0" style="background-color: #ecf0f1; color: #34495e;">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-user-circle fa-5x mb-3" style="color: #1abc9c;"></i>
+                        <h5 class="card-title fw-bold text-capitalize">@Model.usuario_nombre</h5>
+                        <p class="text-muted">Editar información</p>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.usuario_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.usuario_nombre, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.usuario_contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input class="form-control text-box single-line" id="usuario_contrasena" name="usuario_contrasena" type="password">
-                        @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="clearfix"><br /></div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-primary" >@UiMessages.BtnGuardar</button>
-                        <a href="@Url.Action("Index","Usuarios")" class="btn btn-outline-primary">@UiMessages.BtnRegresar</a>
-                    </div>
-                </div>
-                <br />
             </div>
-        }
-        <br />
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="card shadow-sm border-0" style="background-color: #f8f9fa; color: #34495e;">
+                    <div class="card-header" style="background-color: #34495e; color: #ffffff;">
+                        <h4 class="mb-0">Editar Usuario</h4>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("Edit", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.usuario_id)
+
+                            <!-- Usuario Código -->
+                            <div class="mb-4">
+                                <label for="usuario_codigo" class="form-label fw-bold">
+                                    <i class="fa-solid fa-id-badge me-2" style="color: #34495e;"></i> Código de Usuario:
+                                </label>
+                                @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
+                            </div>
+                            <hr style="border-color: #1abc9c;" />
+
+                            <!-- Usuario Nombre -->
+                            <div class="mb-4">
+                                <label for="usuario_nombre" class="form-label fw-bold">
+                                    <i class="fa-solid fa-user me-2" style="color: #34495e;"></i> Nombre:
+                                </label>
+                                @Html.EditorFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.usuario_nombre, "", new { @class = "text-danger" })
+                            </div>
+                            <hr style="border-color: #1abc9c;" />
+
+                            <!-- Usuario Contraseña -->
+                            <div class="mb-4">
+                                <label for="usuario_contrasena" class="form-label fw-bold">
+                                    <i class="fa-solid fa-key me-2" style="color: #34495e;"></i> Contraseña:
+                                </label>
+                                <div class="input-group">
+                                    <input class="form-control" id="usuario_contrasena" name="usuario_contrasena" type="password"
+                                           value="@Model.usuario_contrasena" />
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
+                            </div>
+                        }
+
+                        <!-- Botones de acción -->
+                    <div class="text-end mt-4">
+                        <a href="@Url.Action("Details", "Usuarios", new { id = Model.usuario_id })" class="btn btn-outline-primary">
+                            <i class="fa-solid fa-arrow-left"></i> @UiMessages.BtnRegresar
+                        </a>  
+                        <button type="submit" value="Guardar" class="btn btn-primary">@UiMessages.BtnGuardar
+                            <i class="fa-solid fa-save"></i>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #ffffff;
+        color: #34495e;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .btn {
+        transition: all 0.3s ease-in-out;
+    }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+    hr {
+        border-top: 1px solid #1abc9c;
+    }
+</style>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        var passwordField = document.getElementById('usuario_contrasena');
+        var icon = this.querySelector('i');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text'; // Cambia el tipo a texto para mostrar la contraseña
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password'; // Cambia el tipo a password para ocultarla
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+</script>
