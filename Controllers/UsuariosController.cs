@@ -54,7 +54,7 @@ namespace adventureworks.Controllers
                 {
                     db.usuarios.Add(usuario);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Login","Login");
                 }
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
@@ -67,10 +67,10 @@ namespace adventureworks.Controllers
                     }
                 }
                 // Regresar la vista con los errores añadidos al ModelState
-                return View(usuario);
+                return RedirectToAction("Login", "Login");
             }
 
-            return View(usuario);
+            return RedirectToAction("Login", "Login");
         }
 
         // GET: Usuarios/Edit/5
