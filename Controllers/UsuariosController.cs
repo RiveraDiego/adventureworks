@@ -17,7 +17,9 @@ namespace adventureworks.Controllers
         // GET: Usuarios
         public ActionResult Index()
         {
-            return View(db.usuarios.ToList());
+            //return View(db.usuarios.ToList());
+            return RedirectToAction("Index", "Fotos");
+
         }
 
         // GET: Usuarios/Details/5
