@@ -64,6 +64,8 @@ namespace adventureworks.Controllers
             {
                 try
                 {
+                    comentario.usuario_id = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
+                    comentario.comentario_fecha_creacion = DateTime.Now;
                     db.comentarios.Add(comentario);
                     db.SaveChanges();
                     // return RedirectToAction("Edit", new { id = foto.foto_id });
@@ -110,7 +112,6 @@ namespace adventureworks.Controllers
                 if (!allowedExtensions.Contains(extension))
                 {
                     ViewBag.FileError = "Formato de archivo no permitido. Solo se permiten imágenes.";
-                    ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre", foto.usuario_id);
                     return View(foto);
                 }
 
@@ -125,7 +126,6 @@ namespace adventureworks.Controllers
             else
             {
                 ViewBag.FileError = "Por favor, selecciona un archivo de imagen.";
-                ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre", foto.usuario_id);
                 return View(foto);
             }
             if (ModelState.IsValid)

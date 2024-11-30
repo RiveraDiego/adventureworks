@@ -19,8 +19,9 @@ namespace adventureworks.Models
         public string comentario_subject { get; set; }
         public string comentario_body { get; set; }
         public int foto_id { get; set; }
-    
         public virtual foto foto { get; set; }
         public virtual usuario usuario { get; set; }
+        public System.DateTime comentario_fecha_creacion { get; set; }
+
     }
 }
