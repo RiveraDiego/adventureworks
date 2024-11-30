@@ -5,13 +5,25 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li>@Html.ActionLink("Inicio", "Index", "Fotos", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownPerfil" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Perfil</a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPerfil">
-                        <li><a class="dropdown-item" href="blog-home.html">Mi Perfil</a></li>
-                        <li><a class="dropdown-item" href="@Url.Action("Logout", "Login")">Cerrar Sesion</a></li>
-                    </ul>
-                </li>
+                @if (Request.Cookies["UserSession"] != null)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-capitalize" id="navbarDropdownPerfil" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        @Request.Cookies["UserSession"]["usuario_nombre"]
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPerfil">
+                            <li><a class="dropdown-item" href="@Url.Action("Create","Fotos")">Nueva publicaci&oacute;n</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Details","Usuarios", new {id = Request.Cookies["UserSession"]["usuario_id"] })">Mi Perfil</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Logout", "Login")">Cerrar Sesion</a></li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li class="d-flex align-items-center">
+                        <a class="btn btn-outline-info btn-sm" href="@Url.Action("Login", "Login")">Iniciar Sesi&oacute;n</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
