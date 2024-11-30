@@ -18,7 +18,15 @@ namespace adventureworks.Controllers
         // GET: fotos
         public ActionResult Index()
         {
-            var fotos = db.fotos.Include(f => f.usuario);
+            var fotos = db.fotos
+                .Include(f => f.usuario) // Incluye los datos relacionados de usuario
+                .OrderByDescending(f => f.foto_fecha_creacion) // Ordenar por la fecha de creacion mas reciente
+                .Take(12); // Toma solo los ultimos 12 registros
+            return View(fotos.ToList());
+        }
+        public ActionResult Listado()
+        {
+            var fotos = db.fotos.Include(f => f.usuario).OrderByDescending(f => f.foto_fecha_creacion);
             return View(fotos.ToList());
         }
 
@@ -92,7 +100,7 @@ namespace adventureworks.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "foto_id,foto_titulo,foto_file,foto_descripcion,foto_fecha_creacion,usuario_id")] foto foto, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "foto_id,foto_titulo,foto_file,foto_descripcion,foto_fecha_creacion")] foto foto, HttpPostedFileBase file)
         {
             if (file != null && file.ContentLength > 0)
             {
@@ -125,6 +133,7 @@ namespace adventureworks.Controllers
                 try
                 {
                     foto.foto_fecha_creacion = DateTime.Now;
+                    foto.usuario_id = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
                     db.fotos.Add(foto);
                     db.SaveChanges();
                     // return RedirectToAction("Edit", new { id = foto.foto_id });
