@@ -30,5 +30,16 @@ namespace adventureworks.Models
         public virtual ICollection<comentario> comentarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foto> fotos { get; set; }
+
+
+        public string ContrasenaFormateada
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(usuario_contrasena) || usuario_contrasena.Length <= 2)
+                    return usuario_contrasena; // Si es muy corta, devuelve tal cual.
+                return usuario_contrasena[0] + new string('*', usuario_contrasena.Length - 2) + usuario_contrasena[usuario_contrasena.Length - 1];
+            }
+        }
     }
 }

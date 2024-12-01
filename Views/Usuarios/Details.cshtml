@@ -4,62 +4,105 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<section class="py-5">
+<section class="py-5" style="background-color: #ffffff;">
     <div class="container px-5 my-5">
         <div class="row gx-5">
+            <!-- Sidebar -->
             <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-lg-5 mb-4">
-                    <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
-                    <div class="ms-3">
-                        <div class="fw-bold">@Model.usuario_codigo</div>
+                <div class="card shadow-sm border-0" style="background-color: #ecf0f1; color: #34495e; ">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-user-circle fa-5x mb-3" style="color: #1abc9c; "></i>
+                        <h5 class="card-title fw-bold text-capitalize">@Model.usuario_nombre</h5>
+                        <p class="text-muted">Información</p>
+                    </div>
+                </div>
+                <div class="card shadow-sm border-0 mt-3" style="background-color: #ecf0f1; color: #34495e; ">
+                    <div class="card-body text-center">
+                        <i class="fa-regular fa-images fa-5x mb-3" style="color: #BD461A /*#1A74BD*/; "></i>
+                        <h5 class="card-title fw-bold text-capitalize">
+                            <a href="@Url.Action("MisPublicaciones","Fotos")" class="btn btn-primary btn-sm">
+                                Mis publicaciones <i class="fa-solid fa-up-right-from-square"></i>
+                            </a>
+                        </h5>
+                        <p class="text-muted">@ViewBag.total_publicaciones publicaciones.</p>
                     </div>
                 </div>
             </div>
+
+            <!-- Main Content -->
             <div class="col-lg-9">
-                <!-- Post content-->
-                <article>
-                    <!-- Post header-->
-                    <header class="mb-4">
-                        <!-- Post title-->
-                        <a href="@Url.Action("Index","Usuarios")" class="btn btn-outline-primary">@UiMessages.BtnRegresar</a>
-                        
-                        <!-- Post meta content-->
-                    </header>
-                    <!-- Post content-->
-                    <section class="mb-5">
-                        <div class="form-group"><hr />
-                            <h1 class="fw-bolder mb-1"> @Html.Label("Nombre: ", htmlAttributes: new { @class = "control-label col-md-2" }) </h1>
-                            <div class="col-md-10">
-                                <h2>@Html.DisplayFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control" } }) </h2>
-                                @Html.ValidationMessageFor(model => model.usuario_nombre, "", new { @class = "text-danger" })
-                            </div>
-                            <hr />
-                        </div><br />
-                        <div class="form-group">
-                            <h1 class="fw-bolder mb-1"> @Html.Label("Usuario: ", htmlAttributes: new { @class = "control-label col-md-2" }) </h1>
-                            <div class="col-md-10">
-                                <h2>@Html.DisplayFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } }) </h2>
-                                @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
-                            </div>
-                            <hr />
-                        </div><br />
-                        <div class="form-group">
-                            <h1 class="fw-bolder mb-1"> @Html.Label("Contrasena", htmlAttributes: new { @class = "control-label col-md-2" }) </h1>
-                            <div class="col-md-10">
-                                <h2>@Html.DisplayFor(model => model.usuario_contrasena, new { htmlAttributes = new { @class = "form-control" } }) </h2>
-                                @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
-                            </div>
-                        </div><br />
-                        <hr />
-                        <div class="form-group">
-                            <div class="col-md-offset-2 " style="text-align:right;">
-                                <a href="@Url.Action("Edit", "Usuarios", new { id = Model.usuario_id })" class="btn btn-primary">@UiMessages.BtnEditar</a>
-                            </div>
+                <div class="card shadow-sm border-0" style="background-color: #f8f9fa; color: #34495e;">
+                    <div class="card-header" style="background-color: #34495e; color: #ffffff; ">
+                        <h4 class="mb-0">Información del Usuario</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Nombre -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold" style="color: #34495e;">
+                                <i class="fa-solid fa-user me-2" style="color: #34495e; "></i> Nombre:
+                            </h5>
+                            <p class="fs-5">@Model.usuario_nombre</p>
                         </div>
-                    </section>
-                </article>   
+                        <hr style="border-color: #1abc9c;" />
+
+                        <!-- Usuario -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold" style="color: #34495e;">
+                                <i class="fa-solid fa-id-badge me-2" style="color: #34495e;"></i> Usuario:
+                            </h5>
+                            <p class="fs-5">@Model.usuario_codigo</p>
+                        </div>
+                        <hr style="border-color: #1abc9c;" />
+
+                        <!-- Contraseña -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold" style="color: #34495e;">
+                                <i class="fa-solid fa-key me-2" style="color: #34495e;"></i> Contraseña:
+                            </h5>
+                            <p class="fs-5">@Model.ContrasenaFormateada</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="text-end mt-4">
+                    <a href="@Url.Action("Index", "Usuarios")" class="btn btn-outline-primary">
+                        <i class="fa-solid fa-arrow-left"></i> @UiMessages.BtnRegresar
+                    </a>
+                    <a href="@Url.Action("Edit", "Usuarios", new { id = Model.usuario_id })" class="btn btn-primary">
+                        <i class="fa-solid fa-edit"></i> @UiMessages.BtnEditar
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #ffffff;
+        color: #34495e;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .btn {
+        transition: all 0.3s ease-in-out;
+    }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+    hr {
+        border-top: 1px solid #1abc9c;
+    }
+</style>

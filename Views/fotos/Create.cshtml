@@ -40,12 +40,16 @@
                 </div>
                 <div class="form-group mt-3">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="@UiMessages.BtnGuardar" class="btn btn-primary" />
+                        <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-save"></i> @UiMessages.BtnGuardar
+                        </button>
                     </div>
                 </div>
                 <div class="form-group mt-3">
                     <div class="col-md-offset-2 col-md-10">
-                        <a class="btn btn-danger btn-sm" href="@Url.Action("Index","Fotos")">@UiMessages.BtnRegresar</a>
+                        <a class="btn btn-outline-primary btn-sm" href="@Url.Action("Index","Fotos")">
+                            <i class="fa-solid fa-arrow-left"></i> @UiMessages.BtnRegresar
+                        </a>
                     </div>
                 </div>
             </div>
