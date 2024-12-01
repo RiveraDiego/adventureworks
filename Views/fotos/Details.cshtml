@@ -21,7 +21,9 @@
                     <!-- Post header-->
                     <header class="mb-4">
                         <!-- Post title-->
-                        <a href="@Url.Action("Index","Fotos")" class="btn btn-outline-primary btn-sm">@UiMessages.BtnRegresar</a>
+                        <a href="@Url.Action("Index","Fotos")" class="btn btn-outline-primary btn-sm">
+                            <i class="fa-solid fa-arrow-left"></i>  @UiMessages.BtnRegresar
+                        </a>
                         <h1 class="fw-bolder mb-1">@Model.foto_titulo</h1>
                         <!-- Post meta content-->
                         <div class="text-muted fst-italic mb-2">@Model.foto_fecha_creacion</div>

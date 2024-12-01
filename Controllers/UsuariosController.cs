@@ -30,6 +30,9 @@ namespace adventureworks.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             usuario usuario = db.usuarios.Find(id);
+            int total_publicaciones = db.fotos.Count(f => f.usuario_id == id);
+            ViewBag.total_publicaciones = total_publicaciones;
+
             if (usuario == null)
             {
                 return HttpNotFound();

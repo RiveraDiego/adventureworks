@@ -66,17 +66,16 @@
                                 </div>
                                 @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
                             </div>
+                            <!-- Botones de acción -->
+                            <div class="text-end mt-4">
+                                <a href="@Url.Action("Details", "Usuarios", new { id = Model.usuario_id })" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-arrow-left"></i> @UiMessages.BtnRegresar
+                                </a>
+                                <button type="submit" value="Guardar" class="btn btn-primary">
+                                    <i class="fa-solid fa-save"></i> @UiMessages.BtnGuardar
+                                </button>
+                                </div>
                         }
-
-                        <!-- Botones de acción -->
-                    <div class="text-end mt-4">
-                        <a href="@Url.Action("Details", "Usuarios", new { id = Model.usuario_id })" class="btn btn-outline-primary">
-                            <i class="fa-solid fa-arrow-left"></i> @UiMessages.BtnRegresar
-                        </a>  
-                        <button type="submit" value="Guardar" class="btn btn-primary">@UiMessages.BtnGuardar
-                            <i class="fa-solid fa-save"></i>
-                        </button>
-                    </div>
                     </div>
                 </div>
             </div>
