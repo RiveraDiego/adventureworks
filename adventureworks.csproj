@@ -165,6 +165,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Content\assets\colorlibregform8\css\style.css" />
+    <Content Include="Content\assets\colorlibregform8\fonts\material-icon\css\material-design-iconic-font.css" />
+    <Content Include="Content\assets\colorlibregform8\fonts\material-icon\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\assets\colorlibregform8\fonts\material-icon\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\montserrat-v12-latin-900.svg" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\OFL.txt" />
+    <Content Include="Content\assets\colorlibregform8\images\checked.gif" />
+    <Content Include="Content\assets\colorlibregform8\images\signup-bg.jpg" />
+    <Content Include="Content\assets\colorlibregform8\images\unchecked.gif" />
+    <Content Include="Content\assets\colorlibregform8\js\main.js" />
     <Content Include="Content\assets\favicon.ico" />
     <Content Include="Content\css\fontawesome.css" />
     <Content Include="Content\css\bootstrap-icons.css" />
@@ -173,6 +183,8 @@
     <Content Include="Content\css\sweetalert2.min.css" />
     <Content Include="Content\imagenes\login.png" />
     <Content Include="Content\imagenes\no-image.png" />
+    <Content Include="Content\imagenes\signup.jpg" />
+    <Content Include="Content\imagenes\signup2.jpg" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
     <Content Include="Content\js\jquery-3.7.1.min.js" />
     <Content Include="Content\js\scripts.js" />
@@ -226,6 +238,24 @@
     <Content Include="Content\css\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\css\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Content\css\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="Content\assets\colorlibregform8\css\style.css.map" />
+    <Content Include="Content\assets\colorlibregform8\fonts\material-icon\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Content\assets\colorlibregform8\fonts\material-icon\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\material-icon\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Content\assets\colorlibregform8\fonts\material-icon\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-Bold.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-BoldItalic.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-ExtraLight.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-Italic.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-Light.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-Medium.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-Regular.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\Montserrat-SemiBold.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\montserrat-v12-latin-900.eot" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\montserrat-v12-latin-900.ttf" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\montserrat-v12-latin-900.woff" />
+    <Content Include="Content\assets\colorlibregform8\fonts\montserrat\montserrat-v12-latin-900.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
@@ -242,6 +272,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\fotos\Listado.cshtml" />
+    <Content Include="Views\Shared\_SignUpLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

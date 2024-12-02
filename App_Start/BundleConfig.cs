@@ -20,6 +20,10 @@ namespace adventureworks
                 "~/Content/css/signin.css"
                 ));
 
+            bundles.Add(new StyleBundle("~/SignUp").Include(
+                "~/Content/assets/colorlibregform8/css/style.css"
+                ));
+
             var scriptBundle = new ScriptBundle("~/bundles/scripts")
                 .Include(
                 "~/Content/js/jquery-3.7.1.min.js",
@@ -27,12 +31,19 @@ namespace adventureworks
                 "~/Content/js/sweetalert2.all.min.js",
                 "~/Content/js/scripts.js"
                 );
-            
+
+            var scriptBundleSignUp = new ScriptBundle("~/bundles/SignUp")
+                .Include(
+                "~/Content/assets/colorlibregform8/js/main.js"
+                );
+
             // Limpia las transformaciones predeterminadas (incluida la minimización)
             scriptBundle.Transforms.Clear();
+            scriptBundleSignUp.Transforms.Clear();
 
             // Añade el bundle modificado
             bundles.Add(scriptBundle);
+            bundles.Add(scriptBundleSignUp);
         }
     }
 }
