@@ -1,50 +1,41 @@
 ﻿@model adventureworks.Models.usuario
+@using adventureworks.Utils
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Registro";
+    Layout = "~/Views/Shared/_SignUpLayout.cshtml";
 }
-
-<section class="py-5">
-    <div class="container px-5">
-        <h2 class="fw-bolder fs-5 mb-4">Crear Nuevo Usuario</h2>
-        @using (Html.BeginForm("Create", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                <h4>Usuario</h4>
-                <hr />
+<section class="signup">
+    <!-- <img src="images/signup-bg.jpg" alt=""> -->
+    <div class="container">
+        <div class="signup-content">
+            <h2 class="form-title">Crear cuenta</h2>
+            @using (Html.BeginForm("Create", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data", @id = "signup-form", @class = "signup-form" }))
+            {
+                @Html.AntiForgeryToken()
                 <div class="form-group">
-                    @Html.LabelFor(model => model.usuario_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.usuario_nombre, "", new { @class = "text-danger" })
-                    </div>
+                    <input type="text" class="form-input" name="usuario_nombre" id="usuario_nombre" placeholder="Tu nombre" />
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.usuario_codigo, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
-                    </div>
+                    <input type="text" class="form-input" name="usuario_codigo" id="usuario_codigo" placeholder="Tu codigo único" />
                 </div>
-
                 <div class="form-group">
-                    @Html.LabelFor(model => model.usuario_contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input class="form-control text-box single-line" id="usuario_contrasena" name="usuario_contrasena" type="password">
-                        @Html.ValidationMessageFor(model => model.usuario_contrasena, "", new { @class = "text-danger" })
-                    </div>
-                </div><br />
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Crear Usuario" class="btn btn-success" />
-                        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-outline-primary" })
-                    </div>
+                    <input type="password" class="form-input" name="usuario_contrasena" id="usuario_contrasena" placeholder="Password" />
+                    <span toggle="#usuario_contrasena" class="zmdi zmdi-eye field-icon toggle-password"></span>
                 </div>
-            </div>
-        }
-
+                <div class="form-group">
+                    <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repite la contraseña" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" name="submit" id="submit" class="form-submit">
+                        @UiMessages.btnSignUp <i class="fa-solid fa-right-to-bracket"></i>
+                    </button>
+                </div>
+            }
+            <p class="loginhere">
+                Ya tienes una cuenta? <a href="@Url.Action("Login","Login")" class="loginhere-link">Inicia sesi&oacute;n aqu&iacute;</a>
+            </p>
+        </div>
     </div>
 </section>
 
@@ -65,5 +56,23 @@
         });
     </script>
 }
+
+<script>
+    $(document).ready(function () {
+        $("#signup-form").submit(function (event) {
+            let $password = $("#usuario_contrasena");
+            let $re_password = $("#re_password");
+
+            if ($re_password.val() != $password.val()) {
+                event.preventDefault();
+                Swal.fire({
+                    html: 'Las contraseñas no coinciden',
+                    icon: 'error',
+                    confirmButtonText: 'Cerrar'
+                });
+            }
+        });
+    });
+</script>
 
 @*using (Html.BeginForm())*@
