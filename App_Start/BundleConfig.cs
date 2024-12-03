@@ -34,6 +34,7 @@ namespace adventureworks
 
             var scriptBundleSignUp = new ScriptBundle("~/bundles/SignUp")
                 .Include(
+                "~/Content/assets/colorlibregform8/js/jquery.min.js",
                 "~/Content/assets/colorlibregform8/js/main.js"
                 );
 

@@ -13,14 +13,15 @@
             @using (Html.BeginForm("Create", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data", @id = "signup-form", @class = "signup-form" }))
             {
                 @Html.AntiForgeryToken()
-                <div class="fozrm-group">
-                    <input type="text" class="form-input" name="name" id="name" placeholder="Tu nombre" />
+                <div class="form-group">
+                    <input type="text" class="form-input" name="usuario_nombre" id="usuario_nombre" placeholder="Tu nombre" />
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-input" name="email" id="email" placeholder="Tu alias" />
+                    <input type="text" class="form-input" name="usuario_codigo" id="usuario_codigo" placeholder="Tu codigo único" />
                 </div>
-                <div class="form-group">                                                                                                                                                                                                                                                                                                                                                                                                                                  <       input type="text" class="form-input" name="password" id="password" placeholder="Contraseña" />
-                    <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                <div class="form-group">
+                    <input type="password" class="form-input" name="usuario_contrasena" id="usuario_contrasena" placeholder="Password" />
+                    <span toggle="#usuario_contrasena" class="zmdi zmdi-eye field-icon toggle-password"></span>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repite la contraseña" />
@@ -31,9 +32,9 @@
                     </button>
                 </div>
             }
-                <p class="loginhere">
-                    Ya tienes una cuenta? <a href="@Url.Action("Login","Login")" class="loginhere-link">Inicia sesi&oacute;n aqu&iacute;</a>
-                </p>
+            <p class="loginhere">
+                Ya tienes una cuenta? <a href="@Url.Action("Login","Login")" class="loginhere-link">Inicia sesi&oacute;n aqu&iacute;</a>
+            </p>
         </div>
     </div>
 </section>
@@ -55,5 +56,23 @@
         });
     </script>
 }
+
+<script>
+    $(document).ready(function () {
+        $("#signup-form").submit(function (event) {
+            let $password = $("#usuario_contrasena");
+            let $re_password = $("#re_password");
+
+            if ($re_password.val() != $password.val()) {
+                event.preventDefault();
+                Swal.fire({
+                    html: 'Las contraseñas no coinciden',
+                    icon: 'error',
+                    confirmButtonText: 'Cerrar'
+                });
+            }
+        });
+    });
+</script>
 
 @*using (Html.BeginForm())*@
