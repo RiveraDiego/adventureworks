@@ -173,7 +173,9 @@
     <Content Include="Content\assets\colorlibregform8\fonts\montserrat\OFL.txt" />
     <Content Include="Content\assets\colorlibregform8\images\checked.gif" />
     <Content Include="Content\assets\colorlibregform8\images\signup-bg.jpg" />
+    <Content Include="Content\assets\colorlibregform8\images\signup2.jpg" />
     <Content Include="Content\assets\colorlibregform8\images\unchecked.gif" />
+    <Content Include="Content\assets\colorlibregform8\js\jquery.min.js" />
     <Content Include="Content\assets\colorlibregform8\js\main.js" />
     <Content Include="Content\assets\favicon.ico" />
     <Content Include="Content\css\fontawesome.css" />
@@ -184,7 +186,6 @@
     <Content Include="Content\imagenes\login.png" />
     <Content Include="Content\imagenes\no-image.png" />
     <Content Include="Content\imagenes\signup.jpg" />
-    <Content Include="Content\imagenes\signup2.jpg" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
     <Content Include="Content\js\jquery-3.7.1.min.js" />
     <Content Include="Content\js\scripts.js" />
