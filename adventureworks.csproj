@@ -186,6 +186,7 @@
     <Content Include="Content\imagenes\login.png" />
     <Content Include="Content\imagenes\no-image.png" />
     <Content Include="Content\imagenes\signup.jpg" />
+    <Content Include="Content\imagenes\upload-image.png" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
     <Content Include="Content\js\jquery-3.7.1.min.js" />
     <Content Include="Content\js\scripts.js" />

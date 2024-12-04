@@ -162,11 +162,26 @@ namespace adventureworks.Controllers
         // GET: fotos/Edit/5
         public ActionResult Edit(int? id)
         {
+            foto foto = db.fotos.Find(id);
+            // Validar sesion
+            if (Request.Cookies["UserSession"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                int cookieUserId = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
+                if (foto.usuario_id != cookieUserId)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            foto foto = db.fotos.Find(id);
+            
             if (foto == null)
             {
                 return HttpNotFound();
