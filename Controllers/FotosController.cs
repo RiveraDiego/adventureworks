@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using adventureworks.Models;
+using adventureworks.Utils;
 
 namespace adventureworks.Controllers
 {
@@ -65,7 +66,7 @@ namespace adventureworks.Controllers
                 try
                 {
                     comentario.usuario_id = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
-                    comentario.comentario_fecha_creacion = DateTime.Now;
+                    comentario.comentario_fecha_creacion = TimeZoneHelper.ConvertToElSalvadorTime(DateTime.UtcNow);
                     db.comentarios.Add(comentario);
                     db.SaveChanges();
                     // return RedirectToAction("Edit", new { id = foto.foto_id });
@@ -136,7 +137,7 @@ namespace adventureworks.Controllers
             {
                 try
                 {
-                    foto.foto_fecha_creacion = DateTime.Now;
+                    foto.foto_fecha_creacion = TimeZoneHelper.ConvertToElSalvadorTime(DateTime.UtcNow);
                     foto.usuario_id = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
                     db.fotos.Add(foto);
                     db.SaveChanges();
