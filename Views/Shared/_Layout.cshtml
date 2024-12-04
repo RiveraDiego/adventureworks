@@ -14,5 +14,12 @@
         @RenderBody()
     </main>
     @Html.Partial("_Footer")
+    <script>
+        $(document).ready(function () {
+            // Inicializar los tooltips
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        });
+    </script>
 </body>
 </html>
