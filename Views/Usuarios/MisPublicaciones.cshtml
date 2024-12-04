@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "MisPublicaciones";
+    ViewBag.Title = "Mis Publicaciones";
 }
 <style>
     .overlay {
@@ -15,12 +15,13 @@
         transition: opacity 0.5s ease; /* Suaviza la transición */
     }
 
-    .trashcan-wrapper {
+    .actions-wrapper {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        padding: 5px;
+        padding: 10px;
+        width:100%;
         background-color: transparent;
         color: white;
         border-bottom-left-radius: 5px;
@@ -46,7 +47,7 @@
         opacity: 1; /* Muestra el overlay */
     }
 
-    .lc-block:hover .trashcan-wrapper {
+    .lc-block:hover .actions-wrapper {
         opacity: 1; /* Muestra el ícono de la papelera */
     }
 </style>
@@ -60,10 +61,13 @@
                 {
                     foreach (var foto in Model)
                     {
-                        <div class="col-6 col-lg-3 mb-4 mb-lg-0" >
+                        <div class="col-6 col-lg-3 mb-4 mb-lg-0">
                             <div class="lc-block mb-3">
-                                <div class="trashcan-wrapper" onclick="eliminarDialog(@foto.foto_id);">
-                                    <i class="fa-solid fa-trash-can fa-3x" title="Eliminar"></i>
+                                <div class="actions-wrapper text-center">
+                                    <i class="fa-solid fa-trash-can fa-3x" title="Eliminar" onclick="eliminarDialog(@foto.foto_id);"></i>
+                                    <a href="@Url.Action("Edit","Fotos", new { id = foto.foto_id })" class="text-white" style="margin-left:10%;">
+                                        <i class="fa-solid fa-pen-to-square fa-3x"></i>
+                                    </a>
                                 </div>
                                 <div class="overlay"></div>
                                 <img class="img-fluid" src="@foto.FotoFile" srcset="@foto.FotoFile" sizes="(max-width: 1080px) 100vw, 1080px" width="1080" height="1080" alt="Mis fotos" loading="lazy">
@@ -94,40 +98,40 @@
             confirmButtonColor: "#d33",
             cancelButtonText: "Cancelar"
         }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 // Realiza la solicitud POST
-                fetch('/Fotos/Delete', {
+                fetch('@Url.Action("EliminarFoto","Fotos")', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json', // Asegura que el servidor reciba JSON
-                        'X-CSRF-Token': document.querySelector('input[name="__RequestVerificationToken"]').value // Token antifalsificación si está activado
                     },
-                    body: JSON.stringify({ id: foto_id }) // Enviar el ID como JSON
+                    body: JSON.stringify({ id: foto_id }) 
                 })
-                    .then(response => {
-                        if (response.ok) {
-                            Swal.fire({
-                                icon: "success",
-                                text: "Foto eliminada con éxito.",
-                                timer: 1500
-                            }).then(() => {
-                                location.reload(); // Refresca la página o redirige a otra vista
-                            });
-                        } else {
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: "success",
+                            text: "Foto eliminada con éxito.",
+                            timer: 3000
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        return response.text().then(text => {
                             Swal.fire({
                                 icon: "error",
-                                text: "Hubo un error al eliminar la foto."
+                                text: text || "Hubo un error al eliminar la foto."
                             });
-                        }
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            icon: "error",
-                            text: "No se pudo realizar la solicitud."
-                        });
-                        console.error(error);
+                        })
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: "error",
+                        text: "No se pudo realizar la solicitud."
                     });
+                    console.error(error);
+                });
             }
         });
     }
