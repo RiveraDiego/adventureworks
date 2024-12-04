@@ -91,9 +91,13 @@ namespace adventureworks.Controllers
         }
 
             // GET: fotos/Create
-            public ActionResult Create()
+        public ActionResult Create()
         {
-            ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre");
+            // Validar sesion
+            if (Request.Cookies["UserSession"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View();
         }
 
@@ -212,6 +216,28 @@ namespace adventureworks.Controllers
             db.fotos.Remove(foto);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult EliminarFoto(int id)
+        {
+            try
+            {
+                var foto = db.fotos.Find(id);
+                if (foto == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Foto no encontrada.");
+                }
+
+                db.fotos.Remove(foto);
+                db.SaveChanges();
+
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Foto eliminada correctamente.");
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "Ocurrió un error al eliminar la foto: " + ex.Message);
+            }
         }
 
         protected override void Dispose(bool disposing)
