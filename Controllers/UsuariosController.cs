@@ -135,6 +135,26 @@ namespace adventureworks.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult MisPublicaciones()
+        {
+            // Obtenemos el usuario_id desde la cookie
+            var userCookie = Request.Cookies["UserSession"];
+            if (userCookie == null || string.IsNullOrEmpty(userCookie["usuario_id"]))
+            {
+                // Si no hay cookie o usuario_id, redirigir al login
+                return RedirectToAction("Login", "Login");
+            }
+            int usuarioId = Convert.ToInt32(userCookie["usuario_id"]);
+
+            // Filtra las fotos por el usuario_id
+            var fotos = db.fotos
+                .Include(f => f.usuario) // Incluye los datos relacionados de usuario
+                .Where(f => f.usuario_id == usuarioId) // Filtra por usuario
+                .OrderByDescending(f => f.foto_fecha_creacion); // Ordenar por la fecha de creación más reciente
+
+            return View(fotos.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

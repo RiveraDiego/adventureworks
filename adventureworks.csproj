@@ -274,6 +274,7 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\fotos\Listado.cshtml" />
     <Content Include="Views\Shared\_SignUpLayout.cshtml" />
+    <Content Include="Views\Usuarios\MisPublicaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
