@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using adventureworks.Models;
+using adventureworks.Utils;
 
 namespace adventureworks.Controllers
 {
@@ -71,6 +72,7 @@ namespace adventureworks.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    usuario.fecha_creacion = TimeZoneHelper.ConvertToElSalvadorTime(DateTime.UtcNow);
                     db.usuarios.Add(usuario);
                     db.SaveChanges();
                     return RedirectToAction("Login","Login");

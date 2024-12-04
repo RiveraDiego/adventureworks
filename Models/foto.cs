@@ -39,8 +39,8 @@ namespace adventureworks.Models
             {
                 if (this.foto_file != null && this.foto_file.Length > 0)
                 {
-                    if (this.foto_file.Contains("data:image/png;base64,") 
-                        || this.foto_file.Contains("data:image/jpg;base64,") 
+                    if (this.foto_file.Contains("data:image/png;base64,")
+                        || this.foto_file.Contains("data:image/jpg;base64,")
                         || this.foto_file.Contains("data:image/jpeg;base64,")
                         || this.foto_file.Contains("data:image/gif;base64,"))
                     {
