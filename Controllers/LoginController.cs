@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using adventureworks.Models;
+using adventureworks.Utils;
 
 namespace adventureworks.Controllers
 {
@@ -26,7 +27,7 @@ namespace adventureworks.Controllers
                 authCookie.Values["usuario_id"] = user.usuario_id.ToString();
                 authCookie.Values["usuario_nombre"] = user.usuario_nombre;
                 authCookie.Values["usuario_codigo"] = user.usuario_codigo;
-                authCookie.Expires = DateTime.Now.AddHours(1); // Expira en 24 horas
+                authCookie.Expires = TimeZoneHelper.ConvertToElSalvadorTime(DateTime.UtcNow.AddHours(1)); // Expira en 24 horas
                 Response.Cookies.Add(authCookie);
 
                 return RedirectToAction("Index", "Fotos");
@@ -41,7 +42,7 @@ namespace adventureworks.Controllers
             if (Request.Cookies["UserSession"] != null)
             {
                 HttpCookie authCookie = new HttpCookie("UserSession");
-                authCookie.Expires = DateTime.Now.AddDays(-1); // Expira inmediatamente
+                authCookie.Expires = TimeZoneHelper.ConvertToElSalvadorTime(DateTime.UtcNow.AddDays(-1)); // Expira inmediatamente
                 Response.Cookies.Add(authCookie);
             }
 
