@@ -11,7 +11,8 @@ namespace adventureworks.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class foto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,7 @@ namespace adventureworks.Models
         public int foto_id { get; set; }
         public string foto_titulo { get; set; }
         public string foto_file { get; set; }
+        [DataType(DataType.MultilineText)]
         public string foto_descripcion { get; set; }
         public Nullable<System.DateTime> foto_fecha_creacion { get; set; }
         public int usuario_id { get; set; }
