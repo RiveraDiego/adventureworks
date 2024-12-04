@@ -74,7 +74,7 @@
                                 <button type="submit" value="Guardar" class="btn btn-primary">
                                     <i class="fa-solid fa-save"></i> @UiMessages.BtnGuardar
                                 </button>
-                                </div>
+                            </div>
                         }
                     </div>
                 </div>
@@ -82,7 +82,18 @@
         </div>
     </div>
 </section>
-
+@if (TempData["message"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                text: "@TempData["message"]",
+                icon: "@TempData["icon"]",
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+}
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

@@ -142,7 +142,8 @@ namespace adventureworks.Controllers
                     // No modificar existingUser.fecha_creacion
                     db.Entry(existingUser).State = EntityState.Modified;
                     db.SaveChanges();
-                    ViewBag.edit = true;
+                    TempData["message"] = "Usuario actualizado con exito.";
+                    TempData["icon"] = "success";
                     return RedirectToAction("Edit", new { id = usuario.usuario_id });
                 }
             }
