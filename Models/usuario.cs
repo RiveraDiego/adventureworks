@@ -25,12 +25,12 @@ namespace adventureworks.Models
         public string usuario_nombre { get; set; }
         public string usuario_codigo { get; set; }
         public string usuario_contrasena { get; set; }
+        public System.DateTime fecha_creacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comentario> comentarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foto> fotos { get; set; }
-
 
         public string ContrasenaFormateada
         {

@@ -35,6 +35,7 @@
           <Property Name="usuario_nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="usuario_codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="usuario_contrasena" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__comentari__foto___151B244E">
           <End Role="fotos" Type="Self.fotos" Multiplicity="1">
@@ -133,6 +134,7 @@
           <Property Name="usuario_contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="comentarios" Relationship="Self.FK__comentari__usuar__6E01572D" FromRole="usuarios" ToRole="comentarios" />
           <NavigationProperty Name="fotos" Relationship="Self.FK__fotos__usuario_i__6B24EA82" FromRole="usuarios" ToRole="fotos" />
+          <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK__comentari__foto___6EF57B66">
           <End Role="fotos" Type="Self.foto" Multiplicity="1">
@@ -224,6 +226,7 @@
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="projectsModel.usuario">
               <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
                 <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
                 <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
                 <ScalarProperty Name="usuario_codigo" ColumnName="usuario_codigo" />
