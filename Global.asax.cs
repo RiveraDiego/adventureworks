@@ -12,11 +12,14 @@ namespace adventureworks
     {
         protected void Application_Start()
         {
+            // Configurar la zona horaria global
+            var timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            Application["AppTimeZone"] = timeZone;
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //BundleTable.EnableOptimizations = true;
         }
     }
 }
