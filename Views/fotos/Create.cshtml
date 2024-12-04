@@ -19,7 +19,7 @@
         <h2 class="fw-bolder fs-5 mb-4">Crear nueva entrada de fotograf&iacute;a</h2>
         <hr />
         <div class="row">
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
                 @using (Html.BeginForm("Create", "Fotos", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
@@ -65,15 +65,14 @@
                     </div>
                 }
             </div>
-            <div class="col-6 border border-light-subtle" onclick="subirImagenDialog();" style="cursor: pointer;">
+            <div class="col-sm-12 col-md-6 col-lg-6 border border-light-subtle" onclick="subirImagenDialog();" style="cursor: pointer;">
                 <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
-                    <img id="preview-image" src="/Content/imagenes/upload-image.png" alt="Vista previa" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;" />
+                    <img id="preview-image" src="/Content/imagenes/upload-image.png" alt="Vista previa" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: cover;" />
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 <script>
     function subirImagenDialog() {
         $("#subir-imagen").trigger("click");
@@ -105,5 +104,4 @@
             }
         });
     });
-
 </script>

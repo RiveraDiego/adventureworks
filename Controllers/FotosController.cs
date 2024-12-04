@@ -195,15 +195,42 @@ namespace adventureworks.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "foto_id,foto_titulo,foto_file,foto_descripcion,foto_fecha_creacion,usuario_id")] foto foto)
+        public ActionResult Edit([Bind(Include = "foto_id,foto_titulo,foto_file,foto_descripcion")] foto foto, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(foto).State = EntityState.Modified;
+                // Obtener la foto original desde la base de datos
+                var existingFoto = db.fotos.Find(foto.foto_id);
+
+                // Actualizar campos editables
+                existingFoto.foto_titulo = foto.foto_titulo;
+                existingFoto.foto_descripcion = foto.foto_descripcion;
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    // Procesar el nuevo archivo de foto solo si se proporciona
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    var extension = System.IO.Path.GetExtension(file.FileName).ToLower();
+                    if (!allowedExtensions.Contains(extension))
+                    {
+                        ViewBag.FileError = "Formato de archivo no permitido. Solo se permiten imágenes.";
+                        return View(existingFoto);
+                    }
+
+                    // Convertir el archivo a Base64
+                    using (var binaryReader = new System.IO.BinaryReader(file.InputStream))
+                    {
+                        byte[] fileBytes = binaryReader.ReadBytes(file.ContentLength);
+                        var mimeType = file.ContentType;
+                        existingFoto.foto_file = $"data:{mimeType};base64," + Convert.ToBase64String(fileBytes);
+                    }
+                }
+
+                db.Entry(existingFoto).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = existingFoto.foto_id });
             }
-            ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre", foto.usuario_id);
+
             return View(foto);
         }
 

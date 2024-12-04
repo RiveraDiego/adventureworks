@@ -65,8 +65,8 @@
                         <div class="col-6 col-lg-3 mb-4 mb-lg-0">
                             <div class="lc-block mb-3 border border-light-subtle d-flex align-items-center">
                                 <div class="actions-wrapper text-center">
-                                    <i class="fa-solid fa-trash-can fa-3x" title="Eliminar" onclick="eliminarDialog(@foto.foto_id);"></i>
-                                    <a href="@Url.Action("Edit","Fotos", new { id = foto.foto_id })" class="text-white" style="margin-left:10%;">
+                                    <i class="fa-solid fa-trash-can fa-3x" data-bs-toggle="tooltip" data-bs-placement="left" title="Eliminar" onclick="eliminarDialog(@foto.foto_id);"></i>
+                                    <a href="@Url.Action("Edit","Fotos", new { id = foto.foto_id })"data-bs-placement="left"  class="text-white" style="margin-left:10%;" data-bs-toggle="tooltip" title="Editar">
                                         <i class="fa-solid fa-pen-to-square fa-3x"></i>
                                     </a>
                                 </div>
