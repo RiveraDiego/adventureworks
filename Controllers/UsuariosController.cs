@@ -132,9 +132,19 @@ namespace adventureworks.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var existingUser = db.usuarios.Find(usuario.usuario_id);
+
+                if (existingUser != null)
+                {
+                    existingUser.usuario_nombre = usuario.usuario_nombre;
+                    existingUser.usuario_codigo = usuario.usuario_codigo;
+                    existingUser.usuario_contrasena = usuario.usuario_contrasena;
+                    // No modificar existingUser.fecha_creacion
+                    db.Entry(existingUser).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ViewBag.edit = true;
+                    return RedirectToAction("Edit", new { id = usuario.usuario_id });
+                }
             }
             return View(usuario);
         }
