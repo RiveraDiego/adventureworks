@@ -76,6 +76,18 @@
         </div>
     </div>
 </section>
+@if (TempData["message"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                text: "@TempData["message"]",
+                icon: "@TempData["icon"]",
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+}
 <script>
     function subirImagenDialog() {
         $("#subir-imagen").trigger("click");
