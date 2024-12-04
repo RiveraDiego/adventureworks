@@ -142,6 +142,15 @@ namespace adventureworks.Controllers
                     // No modificar existingUser.fecha_creacion
                     db.Entry(existingUser).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    // Actualizar la cookie del usuario
+                    var userCookie = Request.Cookies["UserSession"];
+                    if (userCookie != null)
+                    {
+                        userCookie.Values["usuario_nombre"] = existingUser.usuario_nombre;
+                        Response.Cookies.Set(userCookie); // Sobrescribir la cookie existente
+                    }
+
                     TempData["message"] = "Usuario actualizado con exito.";
                     TempData["icon"] = "success";
                     return RedirectToAction("Edit", new { id = usuario.usuario_id });
