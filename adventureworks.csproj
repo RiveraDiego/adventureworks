@@ -185,6 +185,8 @@
     <Content Include="Content\css\sweetalert2.min.css" />
     <Content Include="Content\imagenes\login.png" />
     <Content Include="Content\imagenes\no-image.png" />
+    <Content Include="Content\imagenes\SelfieEmoji.ico" />
+    <Content Include="Content\imagenes\SelfieEmoji.png" />
     <Content Include="Content\imagenes\signup.jpg" />
     <Content Include="Content\imagenes\upload-image.png" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
