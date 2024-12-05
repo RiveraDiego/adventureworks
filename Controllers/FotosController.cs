@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using adventureworks.Models;
 using adventureworks.Utils;
+using PagedList;
 
 namespace adventureworks.Controllers
 {
@@ -22,13 +23,18 @@ namespace adventureworks.Controllers
             var fotos = db.fotos
                 .Include(f => f.usuario) // Incluye los datos relacionados de usuario
                 .OrderByDescending(f => f.foto_fecha_creacion) // Ordenar por la fecha de creacion mas reciente
-                .Take(12); // Toma solo los ultimos 12 registros
+                .Take(8); // Toma solo los ultimos 12 registros
             return View(fotos.ToList());
         }
-        public ActionResult Listado()
+        public ActionResult Listado(int? page)
         {
-            var fotos = db.fotos.Include(f => f.usuario).OrderByDescending(f => f.foto_fecha_creacion);
-            return View(fotos.ToList());
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            var fotos = db.fotos
+                .Include(f => f.usuario)
+                .OrderByDescending(f => f.foto_fecha_creacion)
+                .ToPagedList(pageNumber, pageSize); // Aplicar paginacion
+            return View(fotos);
         }
 
         // GET: fotos/Details/5
