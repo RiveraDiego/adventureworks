@@ -28,7 +28,7 @@ namespace adventureworks.Controllers
         }
         public ActionResult Listado(int? page)
         {
-            int pageSize = 12;
+            int pageSize = 8;
             int pageNumber = (page ?? 1);
             var fotos = db.fotos
                 .Include(f => f.usuario)
