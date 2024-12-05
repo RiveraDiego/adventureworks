@@ -5,6 +5,14 @@
 }
 <section class="py-5">
     <div class="container px-5">
+        <div class="row">
+            <div class="col-mb-12 text-left mb-3">
+                <a class="text-decoration-none" href="@Url.Action("Listado","Fotos")">
+                    Ver todas
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
         <div class="row gx-5">
             @foreach (var item in Model)
             {
@@ -49,7 +57,7 @@
                 </div>
             }
         </div>
-        <div class="text-end mb-5 mb-xl-0">
+        <div class="text-left">
             <a class="text-decoration-none" href="@Url.Action("Listado","Fotos")">
                 Ver todas
                 <i class="fa-solid fa-arrow-right"></i>

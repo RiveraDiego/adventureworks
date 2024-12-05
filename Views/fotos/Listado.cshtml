@@ -1,10 +1,37 @@
-﻿@model IEnumerable<adventureworks.Models.foto>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<adventureworks.Models.foto>
 
 @{
     ViewBag.Title = "Listado";
 }
 <section class="py-5">
     <div class="container px-5">
+        <!-- Paginacion -->
+        <nav aria-label="Page navigation example" class="mb-5">
+            <ul class="pagination justify-content-center">
+                @if (Model.HasPreviousPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Listado", new { page = Model.PageNumber - 1 })">Anterior</a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Listado", new { page = i })">@i</a>
+                    </li>
+                }
+                @if (Model.HasNextPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Listado", new { page = Model.PageNumber + 1 })">Siguiente</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+        <!-- Fin de Paginacion -->
         <div class="row gx-5">
             @foreach (var item in Model)
             {
@@ -49,5 +76,29 @@
                 </div>
             }
         </div>
+        <!-- Paginacion -->
+        <nav aria-label="Page navigation example" class="mb-5">
+            <ul class="pagination justify-content-center">
+                @if (Model.HasPreviousPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Listado", new { page = Model.PageNumber - 1 })">Anterior</a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Listado", new { page = i })">@i</a>
+                    </li>
+                }
+                @if (Model.HasNextPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Listado", new { page = Model.PageNumber + 1 })">Siguiente</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+        <!-- Fin de Paginacion -->
     </div>
 </section>
