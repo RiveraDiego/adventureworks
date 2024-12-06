@@ -20,11 +20,19 @@ namespace adventureworks.Controllers
         // GET: fotos
         public ActionResult Index()
         {
-            var fotos = db.fotos
+            try
+            {
+                var fotos = db.fotos
                 .Include(f => f.usuario) // Incluye los datos relacionados de usuario
                 .OrderByDescending(f => f.foto_fecha_creacion) // Ordenar por la fecha de creacion mas reciente
                 .Take(8); // Toma solo los ultimos 12 registros
-            return View(fotos.ToList());
+                return View(fotos.ToList());
+            }
+            catch (Exception ex)
+            {
+                TempData["message"] = "Ocurrio un error: \n"+ex.Message;
+                return View();
+            }
         }
         public ActionResult Listado(int? page)
         {
