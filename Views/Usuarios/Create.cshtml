@@ -38,7 +38,23 @@
         </div>
     </div>
 </section>
-
+@if (TempData["message"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                text: "@TempData["message"]",
+                icon: "@TempData["icon"]",
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                // Esto se ejecuta cuando se cierra el SweetAlert
+                if (result.isConfirmed || result.isDismissed) {
+                    $("#submit").prop("disabled", false); // Habilita el botón
+                }
+            });
+        });
+    </script>
+}
 @if (!ViewData.ModelState.IsValid && ViewData.ModelState.Values.Any(v => v.Errors.Count > 0))
 {
     var erroresHtml = string.Join("<br>", ViewData.ModelState.Values
@@ -52,6 +68,11 @@
                 html: '@Html.Raw(erroresHtml)',
                 icon: 'error',
                 confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                // Esto se ejecuta cuando se cierra el SweetAlert
+                if (result.isConfirmed || result.isDismissed) {
+                    $("#submit").prop("disabled", false); // Habilita el botón
+                }
             });
         });
     </script>
@@ -62,6 +83,7 @@
         $("#signup-form").submit(function (event) {
             let $password = $("#usuario_contrasena");
             let $re_password = $("#re_password");
+            $("#submit").attr("disabled",true);
 
             if ($re_password.val() != $password.val()) {
                 event.preventDefault();
@@ -71,8 +93,11 @@
                     confirmButtonText: 'Cerrar'
                 });
             }
+        }).then((result) => {
+            // Esto se ejecuta cuando se cierra el SweetAlert
+            if (result.isConfirmed || result.isDismissed) {
+                $("#submit").prop("disabled", false); // Habilita el botón
+            }
         });
     });
 </script>
-
-@*using (Html.BeginForm())*@

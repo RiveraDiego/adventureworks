@@ -141,6 +141,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Utils\PasswordHelper.cs" />
     <Compile Include="Utils\TimeZoneHelper.cs" />
     <Compile Include="Utils\UiMessages.cs" />
     <Compile Include="Models\comentario.cs">

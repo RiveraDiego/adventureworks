@@ -25,3 +25,15 @@
     <a class="btn btn-secondary btn-lg w-100 mt-2" href="@Url.Action("Index","Fotos")">Entrar Como Invitado</a>
     <p class="mt-5 mb-3 text-muted">Adventure Works &copy; UTEC | 2024</p>
 }
+@if (TempData["message"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                text: "@TempData["message"]",
+                icon: "@TempData["icon"]",
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+}

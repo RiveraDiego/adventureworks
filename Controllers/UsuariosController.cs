@@ -72,9 +72,15 @@ namespace adventureworks.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // Generar el hash de la contraseña
+                    usuario.usuario_contrasena = PasswordHelper.HashPassword(usuario.usuario_contrasena);
                     usuario.fecha_creacion = TimeZoneHelper.ConvertToElSalvadorTime(DateTime.UtcNow);
+
+                    // Guardar en la base de datos
                     db.usuarios.Add(usuario);
                     db.SaveChanges();
+                    TempData["message"] = "Usuario creado correctamente.";
+                    TempData["icon"] = "success";
                     return RedirectToAction("Login","Login");
                 }
             }
@@ -84,11 +90,31 @@ namespace adventureworks.Controllers
                 {
                     foreach (var error in validationError.ValidationErrors)
                     {
+                        TempData["message"] = error.ErrorMessage;
+                        TempData["icon"] = "error";
                         ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                     }
                 }
                 // Regresar la vista con los errores añadidos al ModelState
                 return RedirectToAction("Login", "Login");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+            {
+                // Capturamos la excepción de SQL
+                if (ex.InnerException?.InnerException is System.Data.SqlClient.SqlException sqlEx)
+                {
+                    if (sqlEx.Number == 2627 || sqlEx.Number == 2601) // Clave única violada
+                    {
+                        TempData["message"] = "El codigo de usuario ya existe. Por favor, usa uno diferente.";
+                        TempData["icon"] = "error";
+                        return View(usuario);
+                    }
+                }
+
+                // Mensaje genérico si no es un error de clave única
+                TempData["message"] = "Ocurrio un error al registrar el usuario. Intentalo de nuevo.";
+                TempData["icon"] = "error";
+                return View(usuario);
             }
 
             return RedirectToAction("Login", "Login");
@@ -138,7 +164,7 @@ namespace adventureworks.Controllers
                 {
                     existingUser.usuario_nombre = usuario.usuario_nombre;
                     existingUser.usuario_codigo = usuario.usuario_codigo;
-                    existingUser.usuario_contrasena = usuario.usuario_contrasena;
+                    existingUser.usuario_contrasena = PasswordHelper.HashPassword(usuario.usuario_contrasena);
                     // No modificar existingUser.fecha_creacion
                     db.Entry(existingUser).State = EntityState.Modified;
                     db.SaveChanges();
@@ -190,6 +216,8 @@ namespace adventureworks.Controllers
             // Validar sesion
             if (Request.Cookies["UserSession"] == null)
             {
+                TempData["message"] = "Debe iniciar sesion primero";
+                TempData["icon"] = "warning";
                 return RedirectToAction("Login", "Login");
             }
             int usuarioId = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
