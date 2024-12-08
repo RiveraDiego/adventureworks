@@ -22,6 +22,7 @@ namespace adventureworks.Controllers
         {
             try
             {
+                ViewBag.TempPassword = PasswordHelper.HashPassword("Pass12345");
                 var fotos = db.fotos
                 .Include(f => f.usuario) // Incluye los datos relacionados de usuario
                 .OrderByDescending(f => f.foto_fecha_creacion) // Ordenar por la fecha de creacion mas reciente
