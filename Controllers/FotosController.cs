@@ -248,40 +248,56 @@ namespace adventureworks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "foto_id,foto_titulo,foto_file,foto_descripcion")] foto foto, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // Obtener la foto original desde la base de datos
-                var existingFoto = db.fotos.Find(foto.foto_id);
-
-                // Actualizar campos editables
-                existingFoto.foto_titulo = foto.foto_titulo;
-                existingFoto.foto_descripcion = foto.foto_descripcion;
-
-                if (file != null && file.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    // Procesar el nuevo archivo de foto solo si se proporciona
-                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-                    var extension = System.IO.Path.GetExtension(file.FileName).ToLower();
-                    if (!allowedExtensions.Contains(extension))
+                    // Obtener la foto original desde la base de datos
+                    var existingFoto = db.fotos.Find(foto.foto_id);
+
+                    // Actualizar campos editables
+                    existingFoto.foto_titulo = foto.foto_titulo;
+                    existingFoto.foto_descripcion = foto.foto_descripcion;
+
+                    if (file != null && file.ContentLength > 0)
                     {
-                        ViewBag.FileError = "Formato de archivo no permitido. Solo se permiten imágenes.";
-                        return View(existingFoto);
+                        // Procesar el nuevo archivo de foto solo si se proporciona
+                        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                        var extension = System.IO.Path.GetExtension(file.FileName).ToLower();
+                        if (!allowedExtensions.Contains(extension))
+                        {
+                            ViewBag.FileError = "Formato de archivo no permitido. Solo se permiten imágenes.";
+                            return View(existingFoto);
+                        }
+
+                        // Convertir el archivo a Base64
+                        using (var binaryReader = new System.IO.BinaryReader(file.InputStream))
+                        {
+                            byte[] fileBytes = binaryReader.ReadBytes(file.ContentLength);
+                            var mimeType = file.ContentType;
+                            existingFoto.foto_file = $"data:{mimeType};base64," + Convert.ToBase64String(fileBytes);
+                        }
                     }
 
-                    // Convertir el archivo a Base64
-                    using (var binaryReader = new System.IO.BinaryReader(file.InputStream))
+                    db.Entry(existingFoto).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["message"] = "Informacion de foto editada con exito.";
+                    TempData["icon"] = "success";
+                    return RedirectToAction("Edit", new { id = existingFoto.foto_id });
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationError in ex.EntityValidationErrors)
+                {
+                    foreach (var error in validationError.ValidationErrors)
                     {
-                        byte[] fileBytes = binaryReader.ReadBytes(file.ContentLength);
-                        var mimeType = file.ContentType;
-                        existingFoto.foto_file = $"data:{mimeType};base64," + Convert.ToBase64String(fileBytes);
+                        // Mostrar las propiedades y mensajes de error en la consola o TempData
+                        TempData["message"] += $"Property: {error.PropertyName}, Error: {error.ErrorMessage}\n";
                     }
                 }
-
-                db.Entry(existingFoto).State = EntityState.Modified;
-                db.SaveChanges();
-                TempData["message"] = "Informacion de foto editada con exito.";
-                TempData["icon"] = "success";
-                return RedirectToAction("Edit", new { id = existingFoto.foto_id });
+                TempData["icon"] = "error";
+                return View(foto);
             }
 
             return View(foto);
