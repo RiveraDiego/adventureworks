@@ -293,7 +293,7 @@ namespace adventureworks.Controllers
                     foreach (var error in validationError.ValidationErrors)
                     {
                         // Mostrar las propiedades y mensajes de error en la consola o TempData
-                        TempData["message"] += $"Property: {error.PropertyName}, Error: {error.ErrorMessage}\n";
+                        TempData["message"] += $"Property: {error.PropertyName}, Error: {error.ErrorMessage};";
                     }
                 }
                 TempData["icon"] = "error";
