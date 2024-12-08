@@ -12,9 +12,14 @@
                     <i class="fa-solid fa-user fa-3x"></i>
                     <div class="ms-3">
                         <div class="fw-bold text-capitalize">
-                        @Model.usuario.usuario_nombre
+                            @Model.usuario.usuario_nombre
                             <br />
-                            
+                            @if (ViewBag.btnEliminar)
+                            {
+                                <button type="button" class="btn btn-danger btn-sm mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Eliminar" onclick="eliminarDialog(@Model.foto_id);">
+                                    <i class="fa-solid fa-trash-can"></i> Eliminar esta foto
+                                </button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -116,3 +121,51 @@
         </div>
     </div>
 </section>
+<script>
+    function eliminarDialog(foto_id) {
+        Swal.fire({
+            icon: "question",
+            text: "Estas seguro que quieres eliminar esta foto?",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            confirmButtonColor: "#d33",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Realiza la solicitud POST
+                fetch('@Url.Action("EliminarFoto","Fotos")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', // Asegura que el servidor reciba JSON
+                    },
+                    body: JSON.stringify({ id: foto_id })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: "success",
+                            text: "Foto eliminada con éxito.",
+                            timer: 3000
+                        }).then(() => {
+                            location.href = "@Url.Action("MisPublicaciones","Usuarios")";
+                        });
+                    } else {
+                        return response.text().then(text => {
+                            Swal.fire({
+                                icon: "error",
+                                text: text || "Hubo un error al eliminar la foto."
+                            });
+                        })
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: "error",
+                        text: "No se pudo realizar la solicitud."
+                    });
+                    console.error(error);
+                });
+            }
+        });
+    }
+</script>

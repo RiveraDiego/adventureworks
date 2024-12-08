@@ -48,24 +48,51 @@ namespace adventureworks.Controllers
         // GET: fotos/Details/5
         public ActionResult Details(int? id)
         {
+            bool btnEliminar = false;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            // Validar sesion para saber si el usuario puede o no comentar
             if (Request.Cookies["UserSession"] != null)
             {
+                btnEliminar = true;
                 ViewBag.session = true;
             }
             else
             {
+                btnEliminar = false;
                 ViewBag.session = false;
             }
 
                 foto foto = db.fotos.Include(f => f.comentarios.Select(c => c.usuario)).FirstOrDefault(f => f.foto_id == id);
             if (foto == null)
             {
-                return HttpNotFound();
+                TempData["message"] = "La foto no fue encontrada.";
+                TempData["icon"] = "warning";
+                return RedirectToAction("Index");
             }
+            else
+            {
+                // Verificamos si el creador de la publicacion es el mismo que ha iniciado sesion
+                // para que aparezca o no, el boton de eliminar esta foto
+                if (btnEliminar)
+                {
+                    int usuarioIdSession = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
+                    if ((int) foto.usuario_id == usuarioIdSession)
+                    {
+                        btnEliminar = true;
+                    }
+                    else
+                    {
+                        btnEliminar = false;
+                    }
+                }
+            }
+
+            ViewBag.btnEliminar = btnEliminar;
+
             // Ordenar los comentarios de forma DESC, desde el ultimo hecho hasta el primero
             foto.comentarios = foto.comentarios.OrderByDescending(c => c.comentario_id).ToList();
             return View(foto);
@@ -166,10 +193,13 @@ namespace adventureworks.Controllers
                 }
                 catch (DbEntityValidationException ex)
                 {
+                    TempData["message"] = " ";
+                    TempData["icon"] = "warning";
                     foreach (var validationError in ex.EntityValidationErrors)
                     {
                         foreach (var error in validationError.ValidationErrors)
                         {
+                            TempData["message"] += " "+ error.ErrorMessage;
                             ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                         }
                     }

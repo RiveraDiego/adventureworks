@@ -188,10 +188,10 @@ namespace adventureworks.Controllers
                             Response.Cookies.Set(userCookie); // Sobrescribir la cookie existente
                         }
 
-                        TempData["message"] = "Usuario actualizado con exito. ";
+                        TempData["message"] = "Usuario actualizado con exito.";
                         if (!msgUpdatedPassword.Equals(""))
                         {
-                            TempData["message"] += msgUpdatedPassword;
+                            TempData["message"] += " "+msgUpdatedPassword;
                         }
                         TempData["icon"] = "success";
                         return RedirectToAction("Edit", new { id = usuario.usuario_id });
