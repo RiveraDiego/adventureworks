@@ -66,7 +66,7 @@
 
                 <!-- Botones de acción -->
                 <div class="text-end mt-4">
-                    <a href="@Url.Action("Index", "Usuarios")" class="btn btn-outline-primary">
+                    <a href="@Url.Action("Index", "Fotos")" class="btn btn-outline-primary btn-sm">
                         <i class="fa-solid fa-arrow-left"></i> @UiMessages.BtnRegresar
                     </a>
                     <a href="@Url.Action("Edit", "Usuarios", new { id = Model.usuario_id })" class="btn btn-primary">
@@ -77,7 +77,23 @@
         </div>
     </div>
 </section>
-
+@if (TempData["message"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                html: "@TempData["message"]",
+                icon: "@TempData["icon"]",
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                // Esto se ejecuta cuando se cierra el SweetAlert
+                if (result.isConfirmed || result.isDismissed) {
+                    $("#submit").prop("disabled", false); // Habilita el botón
+                }
+            });
+        });
+    </script>
+}
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

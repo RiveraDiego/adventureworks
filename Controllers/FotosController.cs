@@ -22,10 +22,6 @@ namespace adventureworks.Controllers
         {
             try
             {
-                
-                var tempPassword = PasswordHelper.HashPassword("@Rbol123");
-                ViewBag.TempPassword = tempPassword;
-
                 var fotos = db.fotos
                 .Include(f => f.usuario) // Incluye los datos relacionados de usuario
                 .OrderByDescending(f => f.foto_fecha_creacion) // Ordenar por la fecha de creacion mas reciente
@@ -135,6 +131,8 @@ namespace adventureworks.Controllers
                 if (!allowedExtensions.Contains(extension))
                 {
                     ViewBag.FileError = "Formato de archivo no permitido. Solo se permiten imágenes.";
+                    TempData["message"] = "Formato de archivo no permitido. Solo se permiten imágenes.";
+                    TempData["icon"] = "warning";
                     return View(foto);
                 }
 
@@ -149,6 +147,8 @@ namespace adventureworks.Controllers
             else
             {
                 ViewBag.FileError = "Por favor, selecciona un archivo de imagen.";
+                TempData["message"] = "Por favor, selecciona un archivo de imagen.";
+                TempData["icon"] = "warning";
                 return View(foto);
             }
             if (ModelState.IsValid)
@@ -173,10 +173,10 @@ namespace adventureworks.Controllers
                             ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                         }
                     }
+                    return View();
                 }
             }
 
-            ViewBag.usuario_id = new SelectList(db.usuarios, "usuario_id", "usuario_nombre", foto.usuario_id);
             return View(foto);
         }
 

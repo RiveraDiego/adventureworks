@@ -86,12 +86,12 @@ namespace adventureworks.Controllers
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
+                TempData["icon"] = "error";
                 foreach (var validationError in ex.EntityValidationErrors)
                 {
                     foreach (var error in validationError.ValidationErrors)
                     {
-                        TempData["message"] = error.ErrorMessage;
-                        TempData["icon"] = "error";
+                        TempData["message"] += "<li>"+ex.Message+"</li>";
                         ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                     }
                 }
@@ -126,6 +126,8 @@ namespace adventureworks.Controllers
             // Validar sesion
             if (Request.Cookies["UserSession"] == null)
             {
+                TempData["message"] = "Primero debe iniciar sesión";
+                TempData["icon"] = "info";
                 return RedirectToAction("Login", "Login");
             }
             else
@@ -133,6 +135,8 @@ namespace adventureworks.Controllers
                 int cookieUserId = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
                 if (id != cookieUserId)
                 {
+                    TempData["message"] = "No tiene permisos para realizar esa acción.";
+                    TempData["icon"] = "warning";
                     return RedirectToAction("Details", new { id = cookieUserId});
                 }
             }
@@ -159,33 +163,60 @@ namespace adventureworks.Controllers
             if (ModelState.IsValid)
             {
                 var existingUser = db.usuarios.Find(usuario.usuario_id);
+                string msgUpdatedPassword = "";
 
                 if (existingUser != null)
                 {
                     existingUser.usuario_nombre = usuario.usuario_nombre;
                     existingUser.usuario_codigo = usuario.usuario_codigo;
-                    if(usuario.usuario_contrasena != "")
+                    if(usuario.usuario_contrasena != "" && usuario.usuario_contrasena != null)
                     {
+                        msgUpdatedPassword = "Contraseña actualizada correctamente";
                         existingUser.usuario_contrasena = PasswordHelper.HashPassword(usuario.usuario_contrasena);
                     }
-                    // No modificar existingUser.fecha_creacion
-                    db.Entry(existingUser).State = EntityState.Modified;
-                    db.SaveChanges();
-
-                    // Actualizar la cookie del usuario
-                    var userCookie = Request.Cookies["UserSession"];
-                    if (userCookie != null)
+                    try
                     {
-                        userCookie.Values["usuario_nombre"] = existingUser.usuario_nombre;
-                        Response.Cookies.Set(userCookie); // Sobrescribir la cookie existente
-                    }
+                        // No modificar existingUser.fecha_creacion
+                        db.Entry(existingUser).State = EntityState.Modified;
+                        db.SaveChanges();
 
-                    TempData["message"] = "Usuario actualizado con exito.";
-                    TempData["icon"] = "success";
-                    return RedirectToAction("Edit", new { id = usuario.usuario_id });
+                        // Actualizar la cookie del usuario
+                        var userCookie = Request.Cookies["UserSession"];
+                        if (userCookie != null)
+                        {
+                            userCookie.Values["usuario_nombre"] = existingUser.usuario_nombre;
+                            Response.Cookies.Set(userCookie); // Sobrescribir la cookie existente
+                        }
+
+                        TempData["message"] = "Usuario actualizado con exito. ";
+                        if (!msgUpdatedPassword.Equals(""))
+                        {
+                            TempData["message"] += msgUpdatedPassword;
+                        }
+                        TempData["icon"] = "success";
+                        return RedirectToAction("Edit", new { id = usuario.usuario_id });
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+                    {
+                        // Capturamos la excepción de SQL
+                        if (ex.InnerException?.InnerException is System.Data.SqlClient.SqlException sqlEx)
+                        {
+                            if (sqlEx.Number == 2627 || sqlEx.Number == 2601) // Clave única violada
+                            {
+                                TempData["message"] = "El codigo de usuario ya existe. Por favor, usa uno diferente.";
+                                TempData["icon"] = "error";
+                                return View(usuario);
+                            }
+                        }
+
+                        // Mensaje genérico si no es un error de clave única
+                        TempData["message"] = "Ocurrio un error al registrar el usuario. Intentalo de nuevo.";
+                        TempData["icon"] = "error";
+                        RedirectToAction("Edit", new { id = usuario.usuario_id });
+                    }
                 }
             }
-            return View(usuario);
+            return RedirectToAction("Edit", new { id = usuario.usuario_id });
         }
 
         // GET: Usuarios/Delete/5

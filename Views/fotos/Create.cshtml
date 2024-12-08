@@ -10,9 +10,9 @@
         opacity: 1; /* Inicia completamente visible */
     }
 
-    #preview-image.hidden {
-        opacity: 0; /* Oculta la imagen */
-    }
+        #preview-image.hidden {
+            opacity: 0; /* Oculta la imagen */
+        }
 </style>
 <section class="py-5">
     <div class="container px-5">
@@ -73,6 +73,18 @@
         </div>
     </div>
 </section>
+@if (TempData["message"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+                html: "@TempData["message"]",
+                icon: "@TempData["icon"]",
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+}
 <script>
     function subirImagenDialog() {
         $("#subir-imagen").trigger("click");
