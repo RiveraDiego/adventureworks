@@ -187,7 +187,7 @@ namespace adventureworks.Controllers
                     db.fotos.Add(foto);
                     db.SaveChanges();
                     // return RedirectToAction("Edit", new { id = foto.foto_id });
-                    TempData["message"] = "Foto creada con exito.";
+                    TempData["message"] = "Foto ("+foto.foto_titulo+") creada con exito.";
                     TempData["icon"] = "success";
                     return RedirectToAction("Edit", new {id = foto.foto_id});
                 }
@@ -281,9 +281,9 @@ namespace adventureworks.Controllers
 
                     db.Entry(existingFoto).State = EntityState.Modified;
                     db.SaveChanges();
-                    TempData["message"] = "Informacion de foto editada con exito.";
+                    TempData["message"] = "Informacion de foto ("+foto.foto_titulo+") editada con exito.";
                     TempData["icon"] = "success";
-                    return RedirectToAction("Edit", new { id = existingFoto.foto_id });
+                    return RedirectToAction("MisPublicaciones","Usuarios");
                 }
             }
             catch (DbEntityValidationException ex)
