@@ -37,7 +37,7 @@
                                 <label for="usuario_codigo" class="form-label fw-bold">
                                     <i class="fa-solid fa-id-badge me-2" style="color: #34495e;"></i> Código de Usuario:
                                 </label>
-                                @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.usuario_codigo, new { htmlAttributes = new { @class = "form-control", required=true } })
                                 @Html.ValidationMessageFor(model => model.usuario_codigo, "", new { @class = "text-danger" })
                             </div>
                             <hr style="border-color: #1abc9c;" />
@@ -47,7 +47,7 @@
                                 <label for="usuario_nombre" class="form-label fw-bold">
                                     <i class="fa-solid fa-user me-2" style="color: #34495e;"></i> Nombre:
                                 </label>
-                                @Html.EditorFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.usuario_nombre, new { htmlAttributes = new { @class = "form-control", required=true } })
                                 @Html.ValidationMessageFor(model => model.usuario_nombre, "", new { @class = "text-danger" })
                             </div>
                             <hr style="border-color: #1abc9c;" />

@@ -75,9 +75,9 @@
                                     @Html.AntiForgeryToken()
                                     <div class="row align-items-center">
                                         <div class="col-sm-12">
-                                            <input type="text" name="comentario_subject" placeholder="@UiMessages.subjectComment" class="form-control" />
+                                            <input type="text" name="comentario_subject" required="" placeholder="@UiMessages.subjectComment" class="form-control" />
                                             <br />
-                                            <textarea class="form-control" rows="3" name="comentario_body" placeholder="@UiMessages.dejarUnComentario"></textarea>
+                                            <textarea class="form-control" rows="3" required="" name="comentario_body" placeholder="@UiMessages.dejarUnComentario"></textarea>
                                             @Html.Hidden("foto_id", Model.foto_id)
 
                                         </div>

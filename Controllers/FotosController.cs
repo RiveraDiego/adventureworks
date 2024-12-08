@@ -110,22 +110,30 @@ namespace adventureworks.Controllers
                     comentario.comentario_fecha_creacion = TimeZoneHelper.ConvertToElSalvadorTime(DateTime.UtcNow);
                     db.comentarios.Add(comentario);
                     db.SaveChanges();
+                    TempData["message"] = "Su comentario ha sido publicado con exito.";
+                    TempData["icon"] = "success";
                     // return RedirectToAction("Edit", new { id = foto.foto_id });
                     return RedirectToAction("Details", new { id = comentario.foto_id});
                 }
                 catch (DbEntityValidationException ex)
                 {
+                    
+                    TempData["icon"] = "error";
                     foreach (var validationError in ex.EntityValidationErrors)
                     {
                         foreach (var error in validationError.ValidationErrors)
                         {
+                            TempData["message"] = $"Property: {error.PropertyName}, Error: {error.ErrorMessage}; ";
                             ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                         }
                     }
+                    return RedirectToAction("Details", new { id = comentario.foto_id });
                 }
             }
             else
             {
+                TempData["message"] = "Ocurrio un error desconocido.";
+                TempData["icon"] = "error";
                 return RedirectToAction("Details", new { id = comentario.foto_id });
             }
 
