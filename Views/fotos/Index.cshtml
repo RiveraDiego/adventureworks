@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Inicio";
 }
-
 <section class="py-5">
     <div class="container px-5">
         <div class="row">
@@ -76,7 +75,7 @@
     <script>
         $(document).ready(function () {
             Swal.fire({
-                text: "@TempData["message"]",
+                html: "@TempData["message"]",
                 icon: "@TempData["icon"]",
                 confirmButtonText: 'Aceptar'
             });

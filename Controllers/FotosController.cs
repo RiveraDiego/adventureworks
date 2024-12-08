@@ -22,7 +22,10 @@ namespace adventureworks.Controllers
         {
             try
             {
-                ViewBag.TempPassword = PasswordHelper.HashPassword("Pass12345");
+                
+                var tempPassword = PasswordHelper.HashPassword("@Rbol123");
+                ViewBag.TempPassword = tempPassword;
+
                 var fotos = db.fotos
                 .Include(f => f.usuario) // Incluye los datos relacionados de usuario
                 .OrderByDescending(f => f.foto_fecha_creacion) // Ordenar por la fecha de creacion mas reciente
@@ -159,7 +162,7 @@ namespace adventureworks.Controllers
                     // return RedirectToAction("Edit", new { id = foto.foto_id });
                     TempData["message"] = "Foto creada con exito.";
                     TempData["icon"] = "success";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Edit", new {id = foto.foto_id});
                 }
                 catch (DbEntityValidationException ex)
                 {

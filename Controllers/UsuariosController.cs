@@ -164,7 +164,10 @@ namespace adventureworks.Controllers
                 {
                     existingUser.usuario_nombre = usuario.usuario_nombre;
                     existingUser.usuario_codigo = usuario.usuario_codigo;
-                    existingUser.usuario_contrasena = PasswordHelper.HashPassword(usuario.usuario_contrasena);
+                    if(usuario.usuario_contrasena != "")
+                    {
+                        existingUser.usuario_contrasena = PasswordHelper.HashPassword(usuario.usuario_contrasena);
+                    }
                     // No modificar existingUser.fecha_creacion
                     db.Entry(existingUser).State = EntityState.Modified;
                     db.SaveChanges();

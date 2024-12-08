@@ -59,7 +59,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input class="form-control" id="usuario_contrasena" name="usuario_contrasena" type="password"
-                                           value="@Model.usuario_contrasena" />
+                                           value="" />
                                     <button type="button" class="btn btn-outline-secondary" id="togglePassword">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
@@ -87,7 +87,7 @@
     <script>
         $(document).ready(function () {
             Swal.fire({
-                text: "@TempData["message"]",
+                html: "@TempData["message"]",
                 icon: "@TempData["icon"]",
                 confirmButtonText: 'Aceptar'
             });
