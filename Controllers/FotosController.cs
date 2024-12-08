@@ -48,7 +48,7 @@ namespace adventureworks.Controllers
         // GET: fotos/Details/5
         public ActionResult Details(int? id)
         {
-            bool btnEliminar = false;
+            bool opcionesUser = false;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -57,12 +57,12 @@ namespace adventureworks.Controllers
             // Validar sesion para saber si el usuario puede o no comentar
             if (Request.Cookies["UserSession"] != null)
             {
-                btnEliminar = true;
+                opcionesUser = true;
                 ViewBag.session = true;
             }
             else
             {
-                btnEliminar = false;
+                opcionesUser = false;
                 ViewBag.session = false;
             }
 
@@ -77,21 +77,21 @@ namespace adventureworks.Controllers
             {
                 // Verificamos si el creador de la publicacion es el mismo que ha iniciado sesion
                 // para que aparezca o no, el boton de eliminar esta foto
-                if (btnEliminar)
+                if (opcionesUser)
                 {
                     int usuarioIdSession = Convert.ToInt32(Request.Cookies["UserSession"]["usuario_id"]);
                     if ((int) foto.usuario_id == usuarioIdSession)
                     {
-                        btnEliminar = true;
+                        opcionesUser = true;
                     }
                     else
                     {
-                        btnEliminar = false;
+                        opcionesUser = false;
                     }
                 }
             }
 
-            ViewBag.btnEliminar = btnEliminar;
+            ViewBag.opcionesUser = opcionesUser;
 
             // Ordenar los comentarios de forma DESC, desde el ultimo hecho hasta el primero
             foto.comentarios = foto.comentarios.OrderByDescending(c => c.comentario_id).ToList();

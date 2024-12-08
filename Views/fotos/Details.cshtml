@@ -6,23 +6,37 @@
 }
 <section class="py-5">
     <div class="container px-5 my-5">
+        <a href="@Url.Action("Index","Fotos")" class="btn btn-outline-primary btn-sm d-lg-none d-xs-inline-block mb-3">
+            <i class="fa-solid fa-arrow-left"></i>  @UiMessages.BtnRegresar
+        </a>
         <div class="row gx-5">
             <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-lg-5 mb-4">
+                <div class="d-flex align-items-center mt-lg-5 mb-2">
                     <i class="fa-solid fa-user fa-3x"></i>
                     <div class="ms-3">
                         <div class="fw-bold text-capitalize">
                             @Model.usuario.usuario_nombre
-                            <br />
-                            @if (ViewBag.btnEliminar)
-                            {
-                                <button type="button" class="btn btn-danger btn-sm mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Eliminar" onclick="eliminarDialog(@Model.foto_id);">
-                                    <i class="fa-solid fa-trash-can"></i> Eliminar esta foto
-                                </button>
-                            }
                         </div>
                     </div>
                 </div>
+                @if (ViewBag.opcionesUser)
+                {
+                    <hr />
+                    <div class="d-flex align-items-center mt-sm-1 mb-4">
+                        <i class="fa-solid fa-user-gear fa-3x"></i>
+                        <div class="ms-3">
+                            <div class="d-grid gap-2 mx-auto">
+                                <a href="@Url.Action("Edit", "Fotos", new { id = Model.foto_id })" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Editar">
+                                    <i class="fa-solid fa-pen-to-square"></i> Editar publicaci&oacute;n
+                                </a>
+                                <br />
+                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" title="Eliminar" onclick="eliminarDialog(@Model.foto_id);">
+                                    <i class="fa-solid fa-trash-can"></i> Eliminar esta foto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
             <div class="col-lg-9">
                 <!-- Post content-->
@@ -30,7 +44,7 @@
                     <!-- Post header-->
                     <header class="mb-4">
                         <!-- Post title-->
-                        <a href="@Url.Action("Index","Fotos")" class="btn btn-outline-primary btn-sm">
+                        <a href="@Url.Action("Index","Fotos")" class="btn btn-outline-primary btn-sm d-none d-lg-inline-block">
                             <i class="fa-solid fa-arrow-left"></i>  @UiMessages.BtnRegresar
                         </a>
                         <h1 class="fw-bolder mb-1">@Model.foto_titulo</h1>
